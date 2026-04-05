@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Anthony Smith</title>
+  <meta name="description" content="Get in touch with Anthony Smith — junior security engineer open to opportunities in Philadelphia and remote roles.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav" id="main-nav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <svg class="nav__logo-svg" viewBox="0 0 32 32" fill="none">
+          <path d="M16 4L6 8.5v7.5c0 5.523 4.25 9.996 10 10.995 5.75-.999 10-5.472 10-10.995V8.5L16 4z" fill="var(--color-primary)" opacity="0.12"/>
+          <path d="M16 4L6 8.5v7.5c0 5.523 4.25 9.996 10 10.995 5.75-.999 10-5.472 10-10.995V8.5L16 4z" stroke="var(--color-primary)" stroke-width="1.5" fill="none"/>
+          <circle cx="16" cy="16" r="2.5" fill="var(--color-primary)"/>
+          <path d="M16 10v3.5M16 18.5V22M10 16h3.5M18.5 16H22" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span class="nav__logo-text">anthony<span>.</span>smith</span>
+      </a>
+      <ul class="nav__links" role="list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="scripts.html">Scripts</a></li>
+        <li><a href="certifications.html">Certs</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="btn-ghost" data-theme-toggle aria-label="Toggle dark mode">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="../assets/Anthony-Smith-CV_Q3.docx" download class="btn btn--primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Resume
+        </a>
+      </div>
+      <button class="nav__hamburger" id="nav-hamburger" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+    <nav class="nav__mobile" id="nav-mobile">
+      <a href="../index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="scripts.html">Scripts</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="contact.html">Contact</a>
+      <a href="../assets/Anthony-Smith-CV_Q3.docx" download style="color:var(--color-primary);">Download Resume</a>
+    </nav>
+  </div>
+</nav>
+
+<div style="padding-block: var(--space-16) var(--space-10); background: var(--color-surface); border-bottom: 1px solid var(--color-border);">
+  <div class="container">
+    <p class="font-mono" style="font-size: var(--text-xs); color: var(--color-primary); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-3);">// let's connect</p>
+    <h1 style="font-family: var(--font-mono); font-size: var(--text-2xl); font-weight: 700; color: var(--color-text); letter-spacing: -0.02em; margin-bottom: var(--space-4);">Get in Touch</h1>
+    <p style="color: var(--color-text-muted); max-width: 55ch;">Open to junior security engineer, SOC analyst, and IT/security hybrid roles — Philadelphia area preferred, open to remote. Response time: within 24 hours.</p>
+  </div>
+</div>
+
+<main class="section">
+  <div class="container">
+    <div class="two-col" style="align-items: start; gap: clamp(var(--space-10), 6vw, var(--space-20));">
+
+      <!-- Form -->
+      <div class="fade-in">
+        <h2 style="font-family: var(--font-mono); font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-6);">Send a Message</h2>
+
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Jane Recruiter" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="jane@company.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="subject">Subject</label>
+            <input class="form-input" type="text" id="subject" name="subject" placeholder="Security Engineer role — Acme Corp">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea class="form-textarea" id="message" name="message" placeholder="Tell me about the role or what you're looking for..." required></textarea>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn--primary" id="submit-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Send Message
+            </button>
+          </div>
+          <!-- Success state -->
+          <div id="form-success" style="display:none; padding: var(--space-5); background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.3); border-radius: var(--radius-md);">
+            <p class="font-mono" style="font-size: var(--text-sm); color: var(--color-low);">✓ Message sent! I'll get back to you within 24 hours.</p>
+          </div>
+        </form>
+      </div>
+
+      <!-- Info panel -->
+      <div class="fade-in" style="transition-delay: 0.1s;">
+        <h2 style="font-family: var(--font-mono); font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-6);">Direct Contact</h2>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-4); margin-bottom: var(--space-10);">
+
+          <a href="mailto:alspsu@gmail.com" style="display:flex; align-items:center; gap:var(--space-4); padding:var(--space-5); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); text-decoration:none; transition:border-color var(--transition), box-shadow var(--transition);" class="contact-link">
+            <div style="width:40px;height:40px;border-radius:var(--radius-md);background:var(--color-primary-bg);border:1px solid var(--color-primary-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="font-mono" style="font-size:var(--text-xs); color:var(--color-text-faint); margin-bottom:2px;">EMAIL</div>
+              <div style="font-size:var(--text-sm); color:var(--color-primary);">alspsu@gmail.com</div>
+            </div>
+          </a>
+
+          <a href="tel:+12158685852" style="display:flex; align-items:center; gap:var(--space-4); padding:var(--space-5); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); text-decoration:none; transition:border-color var(--transition);" class="contact-link">
+            <div style="width:40px;height:40px;border-radius:var(--radius-md);background:var(--color-primary-bg);border:1px solid var(--color-primary-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.69h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.3a16 16 0 0 0 5.79 5.79l1.87-1.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
+            </div>
+            <div>
+              <div class="font-mono" style="font-size:var(--text-xs); color:var(--color-text-faint); margin-bottom:2px;">PHONE</div>
+              <div style="font-size:var(--text-sm); color:var(--color-text);">215.868.5852</div>
+            </div>
+          </a>
+
+          <a href="https://linkedin.com/in/anthony-smith" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:var(--space-4); padding:var(--space-5); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); text-decoration:none; transition:border-color var(--transition);" class="contact-link">
+            <div style="width:40px;height:40px;border-radius:var(--radius-md);background:var(--color-primary-bg);border:1px solid var(--color-primary-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <div class="font-mono" style="font-size:var(--text-xs); color:var(--color-text-faint); margin-bottom:2px;">LINKEDIN</div>
+              <div style="font-size:var(--text-sm); color:var(--color-text);">linkedin.com/in/anthony-smith</div>
+            </div>
+          </a>
+
+          <div style="display:flex; align-items:center; gap:var(--space-4); padding:var(--space-5); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg);">
+            <div style="width:40px;height:40px;border-radius:var(--radius-md);background:var(--color-primary-bg);border:1px solid var(--color-primary-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="font-mono" style="font-size:var(--text-xs); color:var(--color-text-faint); margin-bottom:2px;">LOCATION</div>
+              <div style="font-size:var(--text-sm); color:var(--color-text);">Philadelphia, PA — open to remote</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Availability / what I'm looking for -->
+        <div style="background: var(--color-primary-bg); border: 1px solid var(--color-primary-border); border-radius: var(--radius-lg); padding: var(--space-6);">
+          <p class="font-mono" style="font-size: var(--text-xs); color: var(--color-primary); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-4);">// what I'm looking for</p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: var(--space-3);">
+            <li style="display:flex; gap:var(--space-3); font-size:var(--text-sm); color:var(--color-text-muted);">
+              <span style="color:var(--color-primary); flex-shrink:0;">→</span> Junior Security Engineer / Security Analyst
+            </li>
+            <li style="display:flex; gap:var(--space-3); font-size:var(--text-sm); color:var(--color-text-muted);">
+              <span style="color:var(--color-primary); flex-shrink:0;">→</span> SOC Analyst (Tier 1 / Tier 2)
+            </li>
+            <li style="display:flex; gap:var(--space-3); font-size:var(--text-sm); color:var(--color-text-muted);">
+              <span style="color:var(--color-primary); flex-shrink:0;">→</span> IT Security / Systems hybrid roles
+            </li>
+            <li style="display:flex; gap:var(--space-3); font-size:var(--text-sm); color:var(--color-text-muted);">
+              <span style="color:var(--color-primary); flex-shrink:0;">→</span> DoD / Federal / cleared positions
+            </li>
+            <li style="display:flex; gap:var(--space-3); font-size:var(--text-sm); color:var(--color-text-muted);">
+              <span style="color:var(--color-primary); flex-shrink:0;">→</span> Philadelphia area or remote
+            </li>
+          </ul>
+          <div style="margin-top: var(--space-5); padding-top: var(--space-5); border-top: 1px solid var(--color-primary-border);">
+            <a href="../assets/Anthony-Smith-CV_Q3.docx" download class="btn btn--outline" style="width:100%; justify-content:center;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Resume (.docx)
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <p class="footer__copy">© 2026 Anthony Smith · Philadelphia, PA · <span class="text-primary">alspsu@gmail.com</span></p>
+      <div class="footer__links">
+        <a href="../index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="scripts.html">Scripts</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+.contact-link:hover { border-color: var(--color-primary-border) !important; box-shadow: var(--shadow-sm); }
+</style>
+
+<script src="../js/main.js"></script>
+<script>
+  // Contact form — mailto fallback (static site)
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim() || 'Portfolio Contact';
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !message) {
+      alert('Please fill in your name, email, and message.');
+      return;
+    }
+
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    window.location.href = `mailto:alspsu@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+    document.getElementById('form-success').style.display = 'block';
+    document.getElementById('submit-btn').disabled = true;
+    this.reset();
+  });
+</script>
+</body>
+</html>
