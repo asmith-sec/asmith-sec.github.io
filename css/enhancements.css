@@ -1,0 +1,176 @@
+/* ============================================================
+   enhancements.css — v2 Design Refresh
+   Loaded AFTER style.css (auto-injected by main.js).
+   Additive only: new components + tasteful polish.
+   Keeps the existing terminal / cyber-teal identity.
+   ============================================================ */
+
+/* ── Scroll progress bar ─────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  z-index: 200;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover));
+  box-shadow: 0 0 10px var(--color-primary);
+  transition: width 80ms linear;
+}
+
+/* ── Back-to-top button ──────────────────────────────────── */
+.back-to-top {
+  position: fixed;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  color: var(--color-bg);
+  background: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  box-shadow: var(--shadow-md), var(--glow);
+  opacity: 0;
+  transform: translateY(12px) scale(0.9);
+  pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition), background var(--transition);
+  z-index: 150;
+}
+.back-to-top.is-visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.back-to-top:hover { background: var(--color-primary-hover); transform: translateY(-2px) scale(1.04); }
+
+/* ── Animated hamburger → X ──────────────────────────────── */
+.nav__hamburger.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__hamburger.is-active span:nth-child(2) { opacity: 0; }
+.nav__hamburger.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Hero: living gradient accent + deeper glow ──────────── */
+.hero__title .accent {
+  background: linear-gradient(100deg, var(--color-primary) 0%, var(--color-primary-hover) 45%, var(--color-primary) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: accent-shimmer 6s linear infinite;
+}
+@keyframes accent-shimmer {
+  to { background-position: 200% center; }
+}
+.hero__eyebrow {
+  backdrop-filter: blur(4px);
+}
+
+/* Stats: subtle divider + hover lift on each stat */
+.hero__stats .stat { position: relative; }
+.hero__stats .stat__value {
+  transition: transform var(--transition), color var(--transition);
+}
+.hero__stats .stat:hover .stat__value { transform: translateY(-2px); color: var(--color-primary-hover); }
+
+/* ── Section header label: leading rule for rhythm ───────── */
+.section-header__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.section-header__label::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--color-primary);
+  opacity: 0.6;
+}
+
+/* ── Cards: accent top edge + smoother lift ──────────────── */
+.card,
+.script-card,
+.cert-card {
+  position: relative;
+  overflow: hidden;
+}
+.card::after,
+.cert-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), transparent 70%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card:hover::after,
+.cert-card:hover::after { transform: scaleX(1); }
+.card:hover { transform: translateY(-4px); }
+
+/* Project tags: gentle pop on card hover */
+.card--project:hover .tag { transform: translateY(-1px); }
+.tag { transition: transform var(--transition); }
+
+/* ── Skill chips: fill sweep on hover ────────────────────── */
+.skill-item {
+  position: relative;
+  overflow: hidden;
+}
+.skill-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary-bg);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+.skill-item:hover::before { transform: scaleX(1); }
+.skill-item > * { position: relative; z-index: 1; }
+
+/* ── Buttons: crisper press feedback ─────────────────────── */
+.btn--primary:active,
+.btn--outline:active { transform: translateY(1px); }
+
+/* ── Nav links: animated underline ───────────────────────── */
+.nav__links a {
+  position: relative;
+  border-bottom: none !important;
+}
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--transition);
+}
+.nav__links a:hover::after,
+.nav__links a[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
+
+/* ── Light mode: make the hero grid + text a touch crisper ─ */
+[data-theme="light"] .hero__grid-overlay { opacity: 0.12; }
+[data-theme="light"] .terminal { box-shadow: var(--shadow-md); }
+[data-theme="light"] .hero__bg {
+  background:
+    radial-gradient(ellipse 80% 50% at 60% 50%, rgba(10,126,120,0.07) 0%, transparent 70%),
+    linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg) 100%);
+}
+
+/* ── Focus visibility (a11y) ─────────────────────────────── */
+:focus-visible { outline-offset: 3px; }
+
+/* ── Respect reduced-motion ──────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero__title .accent { animation: none; }
+  .fade-in { opacity: 1 !important; transform: none !important; }
+}
