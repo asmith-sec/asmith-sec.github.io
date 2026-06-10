@@ -1,93 +1,161 @@
 /* ============================================================
-   main.js — Anthony Smith Security Portfolio
-   Handles: dark/light toggle, sticky nav, mobile menu,
-            terminal typewriter, scroll fade-in animations
+   main.js — Anthony Smith Security Portfolio  (v2)
+   Handles: theme persistence, sticky nav, mobile menu,
+            terminal typewriter, scroll fade-in, scroll progress,
+            back-to-top, resume-link rewrite, reduced-motion.
    ============================================================ */
 
 (function () {
   'use strict';
 
-  // ── Theme toggle ───────────────────────────────────────────
   const html = document.documentElement;
-  const THEME_KEY = 'portfolio-theme'; // kept for reference, not used
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Theme stored in memory only (works in iframes and static hosts)
-  let currentTheme = 'dark'; // default dark
+  // ── Inject enhancement stylesheet (no HTML edits needed) ────
+  (function injectEnhancementCSS() {
+    const base = document.querySelector('link[href$="style.css"]');
+    if (!base) return;
+    const href = base.getAttribute('href').replace('style.css', 'enhancements.css');
+    if (document.querySelector('link[href="' + href + '"]')) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    base.parentNode.insertBefore(link, base.nextSibling);
+  })();
 
-  function getSavedTheme() { return null; } // no-op for static deploy
-  function saveTheme(t) { currentTheme = t; }
+  // ── Theme toggle (PERSISTENT) ───────────────────────────────
+  const THEME_KEY = 'portfolio-theme';
 
-  const initial = 'dark';
+  function getStored() {
+    try { return localStorage.getItem(THEME_KEY); } catch (e) { return null; }
+  }
+  function store(t) {
+    try { localStorage.setItem(THEME_KEY, t); } catch (e) { /* private mode */ }
+  }
+
+  const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  const initial = getStored() || (systemPrefersLight ? 'light' : 'dark');
   html.setAttribute('data-theme', initial);
 
   function applyThemeIcon(btn, theme) {
     if (!btn) return;
     if (theme === 'dark') {
-      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
       btn.setAttribute('aria-label', 'Switch to light mode');
     } else {
-      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
       btn.setAttribute('aria-label', 'Switch to dark mode');
     }
   }
 
-  // Apply to all toggle buttons on the page
   document.querySelectorAll('[data-theme-toggle]').forEach(btn => {
     applyThemeIcon(btn, initial);
     btn.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme') || 'dark';
-      const next = current === 'dark' ? 'light' : 'dark';
+      const next = (html.getAttribute('data-theme') || 'dark') === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
-      saveTheme(next);
+      store(next);
       document.querySelectorAll('[data-theme-toggle]').forEach(b => applyThemeIcon(b, next));
     });
   });
 
+  // ── Rewrite resume links: .docx → polished PDF ──────────────
+  (function rewriteResumeLinks() {
+    document.querySelectorAll('a[href*="Anthony-Smith-CV_Q3.docx"], a[href$=".docx"]').forEach(a => {
+      a.setAttribute('href', a.getAttribute('href').replace(/[^\/]+\.docx/, 'Anthony-Smith-Resume.pdf'));
+      a.removeAttribute('download'); // open PDF in-browser; users can still save
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      // Tidy any visible ".docx" label
+      a.childNodes.forEach(n => {
+        if (n.nodeType === 3 && /\.docx/i.test(n.textContent)) {
+          n.textContent = n.textContent.replace(/\(\.docx\)/i, '(PDF)').replace(/\.docx/i, '');
+        }
+      });
+    });
+  })();
+
+  // ── Scroll progress bar (injected) ──────────────────────────
+  (function scrollProgress() {
+    const bar = document.createElement('div');
+    bar.className = 'scroll-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+    const update = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  })();
+
+  // ── Back-to-top button (injected) ───────────────────────────
+  (function backToTop() {
+    const btn = document.createElement('button');
+    btn.className = 'back-to-top';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+    document.body.appendChild(btn);
+    const toggle = () => btn.classList.toggle('is-visible', window.scrollY > 600);
+    window.addEventListener('scroll', toggle, { passive: true });
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+    });
+    toggle();
+  })();
+
   // ── Sticky nav scroll shadow ────────────────────────────────
   const nav = document.getElementById('main-nav');
   if (nav) {
-    const onScroll = () => {
-      nav.classList.toggle('nav--scrolled', window.scrollY > 8);
-    };
+    const onScroll = () => nav.classList.toggle('nav--scrolled', window.scrollY > 8);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
 
-  // ── Mobile hamburger ────────────────────────────────────────
+  // ── Mobile hamburger (with close-on-interaction) ────────────
   const hamburger = document.getElementById('nav-hamburger');
   const mobileNav = document.getElementById('nav-mobile');
   if (hamburger && mobileNav) {
+    const closeMenu = () => {
+      mobileNav.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.classList.remove('is-active');
+    };
     hamburger.addEventListener('click', () => {
       const open = mobileNav.classList.toggle('is-open');
-      hamburger.setAttribute('aria-expanded', open);
+      hamburger.setAttribute('aria-expanded', String(open));
+      hamburger.classList.toggle('is-active', open);
     });
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 768) closeMenu(); });
   }
 
   // ── Scroll fade-in (IntersectionObserver) ──────────────────
   const fadeEls = document.querySelectorAll('.fade-in');
   if (fadeEls.length > 0) {
-    // Immediately show elements already in the viewport on load
-    const showIfVisible = (el) => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        el.classList.add('visible');
-        return true;
-      }
-      return false;
-    };
-
-    const fadeObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          fadeObs.unobserve(entry.target);
+    if (prefersReduced) {
+      fadeEls.forEach(el => el.classList.add('visible'));
+    } else {
+      const showIfVisible = (el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('visible');
+          return true;
         }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
-
-    fadeEls.forEach(el => {
-      if (!showIfVisible(el)) fadeObs.observe(el);
-    });
+        return false;
+      };
+      const fadeObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            fadeObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+      fadeEls.forEach(el => { if (!showIfVisible(el)) fadeObs.observe(el); });
+    }
   }
 
   // ── Terminal typewriter (home page only) ───────────────────
@@ -119,10 +187,6 @@
       blank:   'transparent',
     };
 
-    let lineIndex = 0;
-    let charIndex = 0;
-    let currentEl = null;
-
     function addLine(line) {
       const div = document.createElement('div');
       div.style.color = colorMap[line.type] || 'var(--color-text-muted)';
@@ -134,41 +198,34 @@
       return div;
     }
 
-    function typeNext() {
-      if (lineIndex >= lines.length) return;
-
-      const line = lines[lineIndex];
-
-      if (!currentEl) {
-        currentEl = addLine(line);
-        charIndex = 0;
-      }
-
-      if (charIndex < line.text.length) {
-        currentEl.textContent = line.text.slice(0, charIndex + 1);
-        charIndex++;
-        // Last line with cursor blink
-        if (lineIndex === lines.length - 1 && charIndex === line.text.length) {
-          const cursor = document.createElement('span');
-          cursor.className = 'terminal__cursor';
-          currentEl.appendChild(cursor);
-          return; // stop, let cursor blink
+    if (prefersReduced) {
+      // Render the full transcript instantly — no animation
+      lines.forEach(line => { addLine(line).textContent = line.text; });
+    } else {
+      let lineIndex = 0, charIndex = 0, currentEl = null;
+      function typeNext() {
+        if (lineIndex >= lines.length) return;
+        const line = lines[lineIndex];
+        if (!currentEl) { currentEl = addLine(line); charIndex = 0; }
+        if (charIndex < line.text.length) {
+          currentEl.textContent = line.text.slice(0, charIndex + 1);
+          charIndex++;
+          if (lineIndex === lines.length - 1 && charIndex === line.text.length) {
+            const cursor = document.createElement('span');
+            cursor.className = 'terminal__cursor';
+            currentEl.appendChild(cursor);
+            return;
+          }
+          setTimeout(typeNext, line.type === 'prompt' ? 28 : 12);
+        } else {
+          lineIndex++; currentEl = null;
+          const delay = line.type === 'blank' ? 80 : line.type === 'prompt' ? 300 : 60;
+          setTimeout(typeNext, delay);
         }
-        setTimeout(typeNext, line.type === 'prompt' ? 28 : 12);
-      } else {
-        // Line complete — move to next
-        lineIndex++;
-        currentEl = null;
-        const delay = line.type === 'blank' ? 80 : line.type === 'prompt' ? 300 : 60;
-        setTimeout(typeNext, delay);
+        termBody.scrollTop = termBody.scrollHeight;
       }
-
-      // Scroll terminal to bottom
-      termBody.scrollTop = termBody.scrollHeight;
+      setTimeout(typeNext, 800);
     }
-
-    // Start after a short delay for polish
-    setTimeout(typeNext, 800);
   }
 
 })();
