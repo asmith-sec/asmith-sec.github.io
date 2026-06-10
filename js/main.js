@@ -74,6 +74,23 @@
     });
   })();
 
+  // ── Correct LinkedIn URL (placeholder → real profile) ──────
+  (function fixLinkedIn() {
+    const REAL = 'https://www.linkedin.com/in/anthony-smith-6a453a89';
+    document.querySelectorAll('a[href*="linkedin.com/in/anthony-smith"]').forEach(a => {
+      if (/anthony-smith-6a453a89/.test(a.getAttribute('href') || '')) return; // already correct
+      a.setAttribute('href', REAL);
+      // Update any visible URL text (footer link or contact card), including nested nodes
+      const tw = document.createTreeWalker(a, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = tw.nextNode())) {
+        if (/linkedin\.com\/in\/anthony-smith(?!-6a453a89)/i.test(node.textContent)) {
+          node.textContent = node.textContent.replace(/linkedin\.com\/in\/anthony-smith[A-Za-z0-9-]*/i, 'linkedin.com/in/anthony-smith-6a453a89');
+        }
+      }
+    });
+  })();
+
   // ── Scroll progress bar (injected) ──────────────────────────
   (function scrollProgress() {
     const bar = document.createElement('div');
