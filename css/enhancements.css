@@ -1,5 +1,5 @@
 /* ============================================================
-   enhancements.css — v2 Design Refresh
+   enhancements.css — v2 Design Refresh (+ v3 additions)
    Loaded AFTER style.css (auto-injected by main.js).
    Additive only: new components + tasteful polish.
    Keeps the existing terminal / cyber-teal identity.
@@ -173,4 +173,56 @@
   }
   .hero__title .accent { animation: none; }
   .fade-in { opacity: 1 !important; transform: none !important; }
+}
+
+/* ==================== v3 weekly additions (2026-06-12) ==================== */
+
+/* -- Skip-to-content link (a11y) --------------------------- */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 300;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-bg);
+  background: var(--color-primary);
+  border-radius: var(--radius-sm, 4px);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-300%);
+  transition: transform 160ms ease;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--color-primary-hover);
+  outline-offset: 2px;
+}
+
+/* -- Copy-to-clipboard button on code samples --------------- */
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.2rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs, 0.75rem);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border, currentColor);
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--transition), color var(--transition), border-color var(--transition);
+}
+pre:hover .copy-btn,
+.copy-btn:focus-visible { opacity: 1; }
+.copy-btn:hover { color: var(--color-primary); border-color: var(--color-primary); }
+.copy-btn.is-copied { color: var(--color-low, #4ade80); border-color: var(--color-low, #4ade80); opacity: 1; }
+
+/* Touch devices have no hover -- keep the button visible */
+@media (hover: none) {
+  .copy-btn { opacity: 1; }
 }
