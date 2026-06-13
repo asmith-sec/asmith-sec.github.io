@@ -1,104 +1,104 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Python Security Scripts — Anthony Smith</title>
-  <meta name="description" content="Python security scripts by Anthony Smith — port scanner, PCAP analyzer, Nessus parser, log threat hunter, and network baseline tool.">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Security Scripts — Anthony Smith</title>
+<meta name="description" content="Python security scripts by Anthony Smith — port scanner, PCAP analyzer, Nessus parser, log threat hunter, and network baseline tool.">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <nav class="nav" id="main-nav">
-  <div class="container">
-    <div class="nav__inner">
-      <a href="../index.html" class="nav__logo">
-        <svg class="nav__logo-svg" viewBox="0 0 32 32" fill="none">
-          <path d="M16 4L6 8.5v7.5c0 5.523 4.25 9.996 10 10.995 5.75-.999 10-5.472 10-10.995V8.5L16 4z" fill="var(--color-primary)" opacity="0.12"/>
-          <path d="M16 4L6 8.5v7.5c0 5.523 4.25 9.996 10 10.995 5.75-.999 10-5.472 10-10.995V8.5L16 4z" stroke="var(--color-primary)" stroke-width="1.5" fill="none"/>
-          <circle cx="16" cy="16" r="2.5" fill="var(--color-primary)"/>
-          <path d="M16 10v3.5M16 18.5V22M10 16h3.5M18.5 16H22" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <span class="nav__logo-text">anthony<span>.</span>smith</span>
-      </a>
-      <ul class="nav__links" role="list">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="scripts.html" aria-current="page">Scripts</a></li>
-        <li><a href="certifications.html">Certs</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div class="nav__actions">
-        <button class="btn-ghost" data-theme-toggle aria-label="Toggle dark mode">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
-        <a href="../assets/Anthony-Smith-CV_Q3.docx" download class="btn btn--primary">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Resume
-        </a>
-      </div>
-      <button class="nav__hamburger" id="nav-hamburger" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
-    <nav class="nav__mobile" id="nav-mobile">
-      <a href="../index.html">Home</a>
-      <a href="projects.html">Projects</a>
-      <a href="scripts.html">Scripts</a>
-      <a href="certifications.html">Certifications</a>
-      <a href="contact.html">Contact</a>
-      <a href="../assets/Anthony-Smith-CV_Q3.docx" download style="color:var(--color-primary);">Download Resume</a>
-    </nav>
-  </div>
+<div class="container">
+<div class="nav__inner">
+<a href="../index.html" class="nav__logo">
+<svg class="nav__logo-svg" viewBox="0 0 32 32" fill="none">
+<path d="M16 4L6 8.5v7.5c0 5.523 4.25 9.996 10 10.995 5.75-.999 10-5.472 10-10.995V8.5L16 4z" fill="var(--color-primary)" opacity="0.12"/>
+<path d="M16 4L6 8.5v7.5c0 5.523 4.25 9.996 10 10.995 5.75-.999 10-5.472 10-10.995V8.5L16 4z" stroke="var(--color-primary)" stroke-width="1.5" fill="none"/>
+<circle cx="16" cy="16" r="2.5" fill="var(--color-primary)"/>
+<path d="M16 10v3.5M16 18.5V22M10 16h3.5M18.5 16H22" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
+<span class="nav__logo-text">anthony<span>.</span>smith</span>
+</a>
+<ul class="nav__links" role="list">
+<li><a href="../index.html">Home</a></li>
+<li><a href="projects.html">Projects</a></li>
+<li><a href="scripts.html" aria-current="page">Scripts</a></li>
+<li><a href="certifications.html">Certs</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+<div class="nav__actions">
+<button class="btn-ghost" data-theme-toggle aria-label="Toggle dark mode">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
+<a href="../assets/Anthony-Smith-CV_Q3.docx" download class="btn btn--primary">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+Resume
+</a>
+</div>
+<button class="nav__hamburger" id="nav-hamburger" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+</div>
+<nav class="nav__mobile" id="nav-mobile">
+<a href="../index.html">Home</a>
+<a href="projects.html">Projects</a>
+<a href="scripts.html">Scripts</a>
+<a href="certifications.html">Certifications</a>
+<a href="contact.html">Contact</a>
+<a href="../assets/Anthony-Smith-CV_Q3.docx" download style="color:var(--color-primary);">Download Resume</a>
+</nav>
+</div>
 </nav>
 
 <div style="padding-block: var(--space-16) var(--space-10); background: var(--color-surface); border-bottom: 1px solid var(--color-border);">
-  <div class="container">
-    <p class="font-mono" style="font-size: var(--text-xs); color: var(--color-primary); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-3);">// python tooling</p>
-    <h1 style="font-family: var(--font-mono); font-size: var(--text-2xl); font-weight: 700; color: var(--color-text); letter-spacing: -0.02em; margin-bottom: var(--space-4);">Security Scripts</h1>
-    <p style="color: var(--color-text-muted); max-width: 60ch;">Five purpose-built Python security tools covering reconnaissance, packet analysis, vulnerability triage, log hunting, and network baselining. All use Python 3.8+ stdlib where possible — minimal dependencies by design.</p>
-    <div style="margin-top: var(--space-6); display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center;">
-      <span class="tag tag--teal">Python 3.8+</span>
-      <span class="tag tag--blue">Stdlib-first</span>
-      <span class="tag tag--green">No pip bloat</span>
-      <span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-faint);">scapy optional for PCAP tools</span>
-    </div>
-  </div>
+<div class="container">
+<p class="font-mono" style="font-size: var(--text-xs); color: var(--color-primary); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-3);">// python tooling</p>
+<h1 style="font-family: var(--font-mono); font-size: var(--text-2xl); font-weight: 700; color: var(--color-text); letter-spacing: -0.02em; margin-bottom: var(--space-4);">Security Scripts</h1>
+<p style="color: var(--color-text-muted); max-width: 60ch;">Five purpose-built Python security tools covering reconnaissance, packet analysis, vulnerability triage, log hunting, and network baselining. All use Python 3.8+ stdlib where possible — minimal dependencies by design.</p>
+<div style="margin-top: var(--space-6); display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center;">
+<span class="tag tag--teal">Python 3.8+</span>
+<span class="tag tag--blue">Stdlib-first</span>
+<span class="tag tag--green">No pip bloat</span>
+<span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-faint);">scapy optional for PCAP tools</span>
+</div>
+</div>
 </div>
 
 <main class="section">
-  <div class="container">
-    <div style="display: flex; flex-direction: column; gap: var(--space-8);">
+<div class="container">
+<div style="display: flex; flex-direction: column; gap: var(--space-8);">
 
-      <!-- Script 1: Port Scanner -->
-      <div class="script-card fade-in">
-        <div class="script-card__header">
-          <div class="script-card__icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <div>
-            <div class="script-card__name">TCP Port Scanner</div>
-            <div class="script-card__file">port_scanner.py</div>
-          </div>
-          <div style="margin-left: auto; display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: flex-end;">
-            <span class="tag tag--teal">Reconnaissance</span>
-            <span class="tag tag--blue">Threading</span>
-          </div>
-        </div>
-        <div class="script-card__body">
-          <p class="script-card__desc">Multithreaded TCP port scanner supporting single IPs, hostnames, and full CIDR ranges. Uses Python's <code>socket</code> and <code>concurrent.futures</code> — no nmap required. Outputs open ports with service name guesses and exports to CSV for reporting.</p>
-          <div style="margin-bottom: var(--space-4);">
-            <p class="font-mono" style="font-size: var(--text-xs); color: var(--color-text-faint); margin-bottom: var(--space-2);">Key capabilities</p>
-            <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
-              <span class="skill-item" style="font-size: var(--text-xs);">CIDR range expansion</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">100-thread concurrency</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">Service name mapping</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">CSV export</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">Configurable timeout</span>
-            </div>
-          </div>
-          <div class="script-card__snippet">
+<!-- Script 1: Port Scanner -->
+<div class="script-card fade-in">
+<div class="script-card__header">
+<div class="script-card__icon">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+</div>
+<div>
+<div class="script-card__name">TCP Port Scanner</div>
+<div class="script-card__file">port_scanner.py</div>
+</div>
+<div style="margin-left: auto; display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: flex-end;">
+<span class="tag tag--teal">Reconnaissance</span>
+<span class="tag tag--blue">Threading</span>
+</div>
+</div>
+<div class="script-card__body">
+<p class="script-card__desc">Multithreaded TCP port scanner supporting single IPs, hostnames, and full CIDR ranges. Uses Python's <code>socket</code> and <code>concurrent.futures</code> — no nmap required. Outputs open ports with service name guesses and exports to CSV for reporting.</p>
+<div style="margin-bottom: var(--space-4);">
+<p class="font-mono" style="font-size: var(--text-xs); color: var(--color-text-faint); margin-bottom: var(--space-2);">Key capabilities</p>
+<div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+<span class="skill-item" style="font-size: var(--text-xs);">CIDR range expansion</span>
+<span class="skill-item" style="font-size: var(--text-xs);">100-thread concurrency</span>
+<span class="skill-item" style="font-size: var(--text-xs);">Service name mapping</span>
+<span class="skill-item" style="font-size: var(--text-xs);">CSV export</span>
+<span class="skill-item" style="font-size: var(--text-xs);">Configurable timeout</span>
+</div>
+</div>
+<div class="script-card__snippet">
 <span class="snippet-comment"># Scan a host across top ports</span>
 python port_scanner.py <span class="snippet-str">--target 192.168.1.0/24</span> <span class="snippet-str">--ports 22,80,443,3389,8080</span>
 
@@ -106,174 +106,174 @@ python port_scanner.py <span class="snippet-str">--target 192.168.1.0/24</span> 
 python port_scanner.py <span class="snippet-str">--target 10.0.0.1</span> <span class="snippet-str">--ports 1-65535</span> <span class="snippet-str">--output scan.csv</span>
 
 <span class="snippet-comment">## Output:</span>
-<span class="snippet-success">  [OPEN] 192.168.1.1:22   (SSH)
-  [OPEN] 192.168.1.1:80   (HTTP)
-  [OPEN] 192.168.1.1:443  (HTTPS)
-  Scan complete — 3 open port(s) found</span>
-          </div>
-        </div>
-      </div>
+<span class="snippet-success"> [OPEN] 192.168.1.1:22 (SSH)
+[OPEN] 192.168.1.1:80 (HTTP)
+[OPEN] 192.168.1.1:443 (HTTPS)
+Scan complete — 3 open port(s) found</span>
+</div>
+</div>
+</div>
 
-      <!-- Script 2: PCAP Analyzer -->
-      <div class="script-card fade-in" style="transition-delay: 0.05s;">
-        <div class="script-card__header">
-          <div class="script-card__icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <div>
-            <div class="script-card__name">PCAP Analyzer</div>
-            <div class="script-card__file">pcap_analyzer.py</div>
-          </div>
-          <div style="margin-left: auto; display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: flex-end;">
-            <span class="tag tag--red">Threat Detection</span>
-            <span class="tag tag--yellow">Wireshark Companion</span>
-          </div>
-        </div>
-        <div class="script-card__body">
-          <p class="script-card__desc">Parses .pcap / .pcapng files with Scapy to produce a threat-intelligence-style summary: protocol breakdown, top talkers, suspicious port flags (Metasploit, Tor, IRC), cleartext credential indicators in FTP/Telnet/HTTP, and a full DNS query log. Exports each category to CSV.</p>
-          <div style="margin-bottom: var(--space-4);">
-            <p class="font-mono" style="font-size: var(--text-xs); color: var(--color-text-faint); margin-bottom: var(--space-2);">Key capabilities</p>
-            <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
-              <span class="skill-item" style="font-size: var(--text-xs);">Protocol breakdown</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">Top talker ranking</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">Suspicious port flagging</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">Cleartext credential detection</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">DNS query extraction</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">CSV report export</span>
-            </div>
-          </div>
-          <div class="script-card__snippet">
+<!-- Script 2: PCAP Analyzer -->
+<div class="script-card fade-in" style="transition-delay: 0.05s;">
+<div class="script-card__header">
+<div class="script-card__icon">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+</div>
+<div>
+<div class="script-card__name">PCAP Analyzer</div>
+<div class="script-card__file">pcap_analyzer.py</div>
+</div>
+<div style="margin-left: auto; display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: flex-end;">
+<span class="tag tag--red">Threat Detection</span>
+<span class="tag tag--yellow">Wireshark Companion</span>
+</div>
+</div>
+<div class="script-card__body">
+<p class="script-card__desc">Parses .pcap / .pcapng files with Scapy to produce a threat-intelligence-style summary: protocol breakdown, top talkers, suspicious port flags (Metasploit, Tor, IRC), cleartext credential indicators in FTP/Telnet/HTTP, and a full DNS query log. Exports each category to CSV.</p>
+<div style="margin-bottom: var(--space-4);">
+<p class="font-mono" style="font-size: var(--text-xs); color: var(--color-text-faint); margin-bottom: var(--space-2);">Key capabilities</p>
+<div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+<span class="skill-item" style="font-size: var(--text-xs);">Protocol breakdown</span>
+<span class="skill-item" style="font-size: var(--text-xs);">Top talker ranking</span>
+<span class="skill-item" style="font-size: var(--text-xs);">Suspicious port flagging</span>
+<span class="skill-item" style="font-size: var(--text-xs);">Cleartext credential detection</span>
+<span class="skill-item" style="font-size: var(--text-xs);">DNS query extraction</span>
+<span class="skill-item" style="font-size: var(--text-xs);">CSV report export</span>
+</div>
+</div>
+<div class="script-card__snippet">
 python pcap_analyzer.py <span class="snippet-str">--file capture.pcap</span> <span class="snippet-str">--output ./report</span>
 
 <span class="snippet-comment">## Sample output:</span>
 <span class="snippet-kw">PROTOCOL BREAKDOWN</span>
-  TCP       3412  ████████████████████████
-  UDP        891  ██████
-  ICMP       234  █
+TCP 3412 ████████████████████████
+UDP 891 ██████
+ICMP 234 █
 
 <span class="snippet-kw">⚠ SUSPICIOUS CONNECTIONS (2 found)</span>
-<span class="snippet-error">  [!] 192.168.1.105 → 10.0.0.3:4444 — Metasploit default
-  [!] 192.168.1.105 → 10.0.0.9:6667 — IRC (C2 channel)</span>
+<span class="snippet-error"> [!] 192.168.1.105 → 10.0.0.3:4444 — Metasploit default
+[!] 192.168.1.105 → 10.0.0.9:6667 — IRC (C2 channel)</span>
 
 <span class="snippet-kw">⚠ CLEARTEXT CREDENTIAL INDICATORS</span>
-<span class="snippet-error">  [!] 192.168.1.20 → 10.0.0.5:21 | keyword: 'PASS '</span>
-          </div>
-        </div>
-      </div>
+<span class="snippet-error"> [!] 192.168.1.20 → 10.0.0.5:21 | keyword: 'PASS '</span>
+</div>
+</div>
+</div>
 
-      <!-- Script 3: Vuln Parser -->
-      <div class="script-card fade-in" style="transition-delay: 0.10s;">
-        <div class="script-card__header">
-          <div class="script-card__icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <div>
-            <div class="script-card__name">Nessus Report Parser</div>
-            <div class="script-card__file">vuln_report_parser.py</div>
-          </div>
-          <div style="margin-left: auto; display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: flex-end;">
-            <span class="tag tag--yellow">Nessus / ACAS</span>
-            <span class="tag tag--green">SAR Generation</span>
-          </div>
-        </div>
-        <div class="script-card__body">
-          <p class="script-card__desc">Parses Nessus / ACAS CSV exports and auto-generates a prioritized remediation report. Ranks hosts by cumulative CVSS risk score, deduplicates findings, and outputs a Markdown SAR draft — cutting manual report-writing time significantly. Built directly from DoD compliance work at EHS Technologies.</p>
-          <div style="margin-bottom: var(--space-4);">
-            <p class="font-mono" style="font-size: var(--text-xs); color: var(--color-text-faint); margin-bottom: var(--space-2);">Key capabilities</p>
-            <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
-              <span class="skill-item" style="font-size: var(--text-xs);">CVSS v2/v3 scoring</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">Host risk ranking</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">Severity breakdown</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">Remediation queue</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">Markdown SAR export</span>
-            </div>
-          </div>
-          <div class="script-card__snippet">
+<!-- Script 3: Vuln Parser -->
+<div class="script-card fade-in" style="transition-delay: 0.10s;">
+<div class="script-card__header">
+<div class="script-card__icon">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+</div>
+<div>
+<div class="script-card__name">Nessus Report Parser</div>
+<div class="script-card__file">vuln_report_parser.py</div>
+</div>
+<div style="margin-left: auto; display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: flex-end;">
+<span class="tag tag--yellow">Nessus / ACAS</span>
+<span class="tag tag--green">SAR Generation</span>
+</div>
+</div>
+<div class="script-card__body">
+<p class="script-card__desc">Parses Nessus / ACAS CSV exports and auto-generates a prioritized remediation report. Ranks hosts by cumulative CVSS risk score, deduplicates findings, and outputs a Markdown SAR draft — cutting manual report-writing time significantly. Built directly from DoD compliance work at EHS Technologies.</p>
+<div style="margin-bottom: var(--space-4);">
+<p class="font-mono" style="font-size: var(--text-xs); color: var(--color-text-faint); margin-bottom: var(--space-2);">Key capabilities</p>
+<div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+<span class="skill-item" style="font-size: var(--text-xs);">CVSS v2/v3 scoring</span>
+<span class="skill-item" style="font-size: var(--text-xs);">Host risk ranking</span>
+<span class="skill-item" style="font-size: var(--text-xs);">Severity breakdown</span>
+<span class="skill-item" style="font-size: var(--text-xs);">Remediation queue</span>
+<span class="skill-item" style="font-size: var(--text-xs);">Markdown SAR export</span>
+</div>
+</div>
+<div class="script-card__snippet">
 python vuln_report_parser.py <span class="snippet-str">--input nessus_export.csv</span> <span class="snippet-str">--output report.md</span>
 
 <span class="snippet-comment">## Terminal summary:</span>
 Total findings: <span class="snippet-num">33</span>
 
 <span class="snippet-kw">SEVERITY BREAKDOWN</span>
-  Critical    <span class="snippet-num">3</span>  ███
-  High        <span class="snippet-num">7</span>  ███████
-  Medium     <span class="snippet-num">14</span>  ██████████████
-  Low         <span class="snippet-num">9</span>  █████████
+Critical <span class="snippet-num">3</span> ███
+High <span class="snippet-num">7</span> ███████
+Medium <span class="snippet-num">14</span> ██████████████
+Low <span class="snippet-num">9</span> █████████
 
 <span class="snippet-kw">TOP HOST BY RISK SCORE</span>
-   1. 192.168.1.10   score=<span class="snippet-num">28.4</span>  findings=<span class="snippet-num">6</span>
-          </div>
-        </div>
-      </div>
+1. 192.168.1.10 score=<span class="snippet-num">28.4</span> findings=<span class="snippet-num">6</span>
+</div>
+</div>
+</div>
 
-      <!-- Script 4: Log Threat Hunter -->
-      <div class="script-card fade-in" style="transition-delay: 0.15s;">
-        <div class="script-card__header">
-          <div class="script-card__icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </div>
-          <div>
-            <div class="script-card__name">Log Threat Hunter</div>
-            <div class="script-card__file">log_threat_hunter.py</div>
-          </div>
-          <div style="margin-left: auto; display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: flex-end;">
-            <span class="tag tag--red">Brute Force</span>
-            <span class="tag tag--blue">Lateral Movement</span>
-          </div>
-        </div>
-        <div class="script-card__body">
-          <p class="script-card__desc">Hunts security log files (Linux auth.log, /var/log/secure) for IoCs: SSH brute-force patterns, failed su attempts, suspicious sudo commands, new user creation, and successful authentications from IPs that previously failed — a strong lateral movement signal.</p>
-          <div style="margin-bottom: var(--space-4);">
-            <p class="font-mono" style="font-size: var(--text-xs); color: var(--color-text-faint); margin-bottom: var(--space-2);">Detection signatures</p>
-            <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
-              <span class="skill-item" style="font-size: var(--text-xs);">SSH brute-force (≥5 fails)</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">Invalid user attempts</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">New account creation</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">Password changes</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">Post-failure success auth</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">JSON findings export</span>
-            </div>
-          </div>
-          <div class="script-card__snippet">
+<!-- Script 4: Log Threat Hunter -->
+<div class="script-card fade-in" style="transition-delay: 0.15s;">
+<div class="script-card__header">
+<div class="script-card__icon">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+</div>
+<div>
+<div class="script-card__name">Log Threat Hunter</div>
+<div class="script-card__file">log_threat_hunter.py</div>
+</div>
+<div style="margin-left: auto; display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: flex-end;">
+<span class="tag tag--red">Brute Force</span>
+<span class="tag tag--blue">Lateral Movement</span>
+</div>
+</div>
+<div class="script-card__body">
+<p class="script-card__desc">Hunts security log files (Linux auth.log, /var/log/secure) for IoCs: SSH brute-force patterns, failed su attempts, suspicious sudo commands, new user creation, and successful authentications from IPs that previously failed — a strong lateral movement signal.</p>
+<div style="margin-bottom: var(--space-4);">
+<p class="font-mono" style="font-size: var(--text-xs); color: var(--color-text-faint); margin-bottom: var(--space-2);">Detection signatures</p>
+<div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+<span class="skill-item" style="font-size: var(--text-xs);">SSH brute-force (≥5 fails)</span>
+<span class="skill-item" style="font-size: var(--text-xs);">Invalid user attempts</span>
+<span class="skill-item" style="font-size: var(--text-xs);">New account creation</span>
+<span class="skill-item" style="font-size: var(--text-xs);">Password changes</span>
+<span class="skill-item" style="font-size: var(--text-xs);">Post-failure success auth</span>
+<span class="skill-item" style="font-size: var(--text-xs);">JSON findings export</span>
+</div>
+</div>
+<div class="script-card__snippet">
 python log_threat_hunter.py <span class="snippet-str">--log /var/log/auth.log</span> <span class="snippet-str">--output findings.json</span>
 
 <span class="snippet-error">⚠ BRUTE-FORCE DETECTION
-  [!] 185.220.101.47    247 failed SSH attempts
-  [!] 194.165.16.22      89 failed SSH attempts
+[!] 185.220.101.47 247 failed SSH attempts
+[!] 194.165.16.22 89 failed SSH attempts
 
 ⚠ POSSIBLE LATERAL MOVEMENT
-  [!] Line  8821: Success from IP 185.220.101.47 that also had failures
-       → session opened for user deploy by (uid=0)</span>
-          </div>
-        </div>
-      </div>
+[!] Line 8821: Success from IP 185.220.101.47 that also had failures
+→ session opened for user deploy by (uid=0)</span>
+</div>
+</div>
+</div>
 
-      <!-- Script 5: Network Baseline -->
-      <div class="script-card fade-in" style="transition-delay: 0.20s;">
-        <div class="script-card__header">
-          <div class="script-card__icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <div>
-            <div class="script-card__name">Network Baseline Comparator</div>
-            <div class="script-card__file">network_baseline.py</div>
-          </div>
-          <div style="margin-left: auto; display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: flex-end;">
-            <span class="tag tag--teal">Anomaly Detection</span>
-            <span class="tag tag--yellow">Before/After</span>
-          </div>
-        </div>
-        <div class="script-card__body">
-          <p class="script-card__desc">Builds a JSON network snapshot from a reference PCAP, then diffs a second capture against it — surfacing new hosts, newly opened ports, protocol shifts, and traffic volume spikes. Includes a demo mode that runs with synthetic data so you can test it without a real capture file.</p>
-          <div style="margin-bottom: var(--space-4);">
-            <p class="font-mono" style="font-size: var(--text-xs); color: var(--color-text-faint); margin-bottom: var(--space-2);">Three modes</p>
-            <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
-              <span class="skill-item" style="font-size: var(--text-xs);">baseline — save snapshot</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">compare — diff captures</span>
-              <span class="skill-item" style="font-size: var(--text-xs);">demo — synthetic data</span>
-            </div>
-          </div>
-          <div class="script-card__snippet">
+<!-- Script 5: Network Baseline -->
+<div class="script-card fade-in" style="transition-delay: 0.20s;">
+<div class="script-card__header">
+<div class="script-card__icon">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+</div>
+<div>
+<div class="script-card__name">Network Baseline Comparator</div>
+<div class="script-card__file">network_baseline.py</div>
+</div>
+<div style="margin-left: auto; display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: flex-end;">
+<span class="tag tag--teal">Anomaly Detection</span>
+<span class="tag tag--yellow">Before/After</span>
+</div>
+</div>
+<div class="script-card__body">
+<p class="script-card__desc">Builds a JSON network snapshot from a reference PCAP, then diffs a second capture against it — surfacing new hosts, newly opened ports, protocol shifts, and traffic volume spikes. Includes a demo mode that runs with synthetic data so you can test it without a real capture file.</p>
+<div style="margin-bottom: var(--space-4);">
+<p class="font-mono" style="font-size: var(--text-xs); color: var(--color-text-faint); margin-bottom: var(--space-2);">Three modes</p>
+<div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+<span class="skill-item" style="font-size: var(--text-xs);">baseline — save snapshot</span>
+<span class="skill-item" style="font-size: var(--text-xs);">compare — diff captures</span>
+<span class="skill-item" style="font-size: var(--text-xs);">demo — synthetic data</span>
+</div>
+</div>
+<div class="script-card__snippet">
 <span class="snippet-comment"># Build baseline</span>
 python network_baseline.py <span class="snippet-str">--mode baseline</span> <span class="snippet-str">--pcap week1.pcap</span> <span class="snippet-str">--save snap.json</span>
 
@@ -281,45 +281,45 @@ python network_baseline.py <span class="snippet-str">--mode baseline</span> <spa
 python network_baseline.py <span class="snippet-str">--mode compare</span> <span class="snippet-str">--pcap current.pcap</span> <span class="snippet-str">--baseline snap.json</span>
 
 <span class="snippet-error">🔴 NEW HOSTS DETECTED (1)
-  [NEW] 192.168.1.99        ports=[4444, 8888]
+[NEW] 192.168.1.99 ports=[4444, 8888]
 
 🟠 NEW OPEN PORTS ON EXISTING HOSTS (1)
-  [!] 192.168.1.10          new ports: [4444]
+[!] 192.168.1.10 new ports: [4444]
 
 🟡 TRAFFIC VOLUME SPIKES (1)
-  [!] 192.168.1.10          7.5x increase (120,000 → 900,000 bytes)</span>
-          </div>
-        </div>
-      </div>
+[!] 192.168.1.10 7.5x increase (120,000 → 900,000 bytes)</span>
+</div>
+</div>
+</div>
 
-    </div>
+</div>
 
-    <!-- Download strip -->
-    <div style="margin-top: var(--space-16); background: var(--color-primary-bg); border: 1px solid var(--color-primary-border); border-radius: var(--radius-xl); padding: var(--space-10); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-6);">
-      <div>
-        <p class="font-mono" style="font-size: var(--text-xs); color: var(--color-primary); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-2);">// download all scripts</p>
-        <p style="color: var(--color-text-muted); font-size: var(--text-sm); max-width: 50ch;">All five scripts are available as a single zip. Python 3.8+, stdlib only (Scapy optional for PCAP tools). Each script has a built-in <code>--help</code> flag with usage examples.</p>
-      </div>
-      <a href="../scripts/security_scripts.zip" download class="btn btn--primary" style="white-space: nowrap;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download Scripts (.zip)
-      </a>
-    </div>
+<!-- Download strip -->
+<div style="margin-top: var(--space-16); background: var(--color-primary-bg); border: 1px solid var(--color-primary-border); border-radius: var(--radius-xl); padding: var(--space-10); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-6);">
+<div>
+<p class="font-mono" style="font-size: var(--text-xs); color: var(--color-primary); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-2);">// download all scripts</p>
+<p style="color: var(--color-text-muted); font-size: var(--text-sm); max-width: 50ch;">All five scripts are available as a single zip. Python 3.8+, stdlib only (Scapy optional for PCAP tools). Each script has a built-in <code>--help</code> flag with usage examples.</p>
+</div>
+<a href="../scripts/security_scripts.zip" download class="btn btn--primary" style="white-space: nowrap;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+Download Scripts (.zip)
+</a>
+</div>
 
-  </div>
+</div>
 </main>
 
 <footer class="footer">
-  <div class="container">
-    <div class="footer__inner">
-      <p class="footer__copy">© 2026 Anthony Smith · Philadelphia, PA</p>
-      <div class="footer__links">
-        <a href="../index.html">Home</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </div>
-  </div>
+<div class="container">
+<div class="footer__inner">
+<p class="footer__copy">© 2026 Anthony Smith · Philadelphia, PA</p>
+<div class="footer__links">
+<a href="../index.html">Home</a>
+<a href="projects.html">Projects</a>
+<a href="contact.html">Contact</a>
+</div>
+</div>
+</div>
 </footer>
 
 <script src="../js/main.js"></script>
