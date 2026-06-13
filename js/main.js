@@ -1,8 +1,10 @@
 /* ============================================================
-   main.js — Anthony Smith Security Portfolio  (v2)
+   main.js — Anthony Smith Security Portfolio  (v3)
    Handles: theme persistence, sticky nav, mobile menu,
             terminal typewriter, scroll fade-in, scroll progress,
-            back-to-top, resume-link rewrite, reduced-motion.
+            back-to-top, resume-link rewrite, reduced-motion,
+            JSON-LD, skip link, current-page nav, copy buttons,
+            external-link hardening.
    ============================================================ */
 
 (function () {
@@ -244,5 +246,96 @@
       setTimeout(typeNext, 800);
     }
   }
+
+  /* ==================== v3 weekly additions (2026-06-12) ==================== */
+
+  // -- SEO: JSON-LD Person structured data ---------------------
+  // Facts mirror what is already published on the site; nothing new.
+  (function injectStructuredData() {
+    if (document.querySelector('script[type="application/ld+json"]')) return;
+    const data = {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Anthony Smith',
+      jobTitle: 'Junior Security Engineer',
+      url: 'https://asmith-sec.github.io/',
+      email: 'mailto:alspsu@gmail.com',
+      address: { '@type': 'PostalAddress', addressLocality: 'Philadelphia', addressRegion: 'PA' },
+      sameAs: [
+        'https://www.linkedin.com/in/anthony-smith-6a453a89',
+        'https://github.com/asmith-sec'
+      ],
+      knowsAbout: ['Vulnerability Assessment', 'Packet Analysis', 'Python', 'RMF', 'Nessus', 'Wireshark']
+    };
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.textContent = JSON.stringify(data);
+    document.head.appendChild(s);
+  })();
+
+  // -- A11y: skip-to-content link ------------------------------
+  (function skipLink() {
+    const target = document.querySelector('main') ||
+                   document.querySelector('.hero') ||
+                   document.querySelector('section');
+    if (!target) return;
+    if (!target.id) target.id = 'main-content';
+    target.setAttribute('tabindex', '-1');
+    const a = document.createElement('a');
+    a.className = 'skip-link';
+    a.href = '#' + target.id;
+    a.textContent = 'Skip to content';
+    a.addEventListener('click', () => target.focus({ preventScroll: false }));
+    document.body.insertBefore(a, document.body.firstChild);
+  })();
+
+  // -- A11y/UX: mark the current page in the nav ---------------
+  // Activates the existing [aria-current="page"] underline style.
+  (function markCurrentNav() {
+    const here = (location.pathname.split('/').pop() || 'index.html');
+    document.querySelectorAll('.nav__links a, #nav-mobile a').forEach(a => {
+      const href = (a.getAttribute('href') || '').split('#')[0];
+      const page = href.split('/').pop() || 'index.html';
+      if (page === here) a.setAttribute('aria-current', 'page');
+    });
+  })();
+
+  // -- UX: copy-to-clipboard buttons on code samples -----------
+  (function copyButtons() {
+    if (!navigator.clipboard) return;
+    document.querySelectorAll('pre').forEach(pre => {
+      if (pre.closest('#terminal-body')) return;        // skip animated demo
+      const text = (pre.textContent || '').trim();
+      if (!text) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'copy-btn';
+      btn.textContent = 'copy';
+      btn.setAttribute('aria-label', 'Copy code to clipboard');
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(text).then(() => {
+          btn.textContent = 'copied!';
+          btn.classList.add('is-copied');
+          setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('is-copied'); }, 1600);
+        }).catch(() => { btn.textContent = 'press Ctrl+C'; });
+      });
+      if (getComputedStyle(pre).position === 'static') pre.style.position = 'relative';
+      pre.appendChild(btn);
+    });
+  })();
+
+  // -- Security polish: harden external links ------------------
+  (function hardenExternalLinks() {
+    document.querySelectorAll('a[href^="http"]').forEach(a => {
+      let url;
+      try { url = new URL(a.href); } catch (e) { return; }
+      if (url.hostname === location.hostname) return;
+      const rel = (a.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
+      if (!rel.includes('noopener')) rel.push('noopener');
+      if (!rel.includes('noreferrer')) rel.push('noreferrer');
+      a.setAttribute('rel', rel.join(' '));
+      if (!a.getAttribute('target')) a.setAttribute('target', '_blank');
+    });
+  })();
 
 })();
