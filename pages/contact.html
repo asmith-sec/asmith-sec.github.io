@@ -93,7 +93,7 @@ Send Message
 </button>
 </div>
 <!-- Success state -->
-<div id="form-success" style="display:none; padding: var(--space-5); background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.3); border-radius: var(--radius-md);">
+<div id="form-success" role="status" aria-live="polite" style="display:none; padding: var(--space-5); background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.3); border-radius: var(--radius-md);">
 <p class="font-mono" style="font-size: var(--text-sm); color: var(--color-low);">✓ Message sent! I'll get back to you within 24 hours.</p>
 </div>
 </form>
@@ -199,26 +199,70 @@ Download Resume (.docx)
 
 <script src="../js/main.js"></script>
 <script>
-// Contact form — mailto fallback (static site)
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-e.preventDefault();
-const name = document.getElementById('name').value.trim();
-const email = document.getElementById('email').value.trim();
-const subject = document.getElementById('subject').value.trim() || 'Portfolio Contact';
-const message = document.getElementById('message').value.trim();
+// Contact form — mailto fallback (static site) with accessible inline validation
+(function () {
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  var successBox = document.getElementById('form-success');
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-if (!name || !email || !message) {
-alert('Please fill in your name, email, and message.');
-return;
-}
+  function field(id) { return document.getElementById(id); }
 
-const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-window.location.href = `mailto:alspsu@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+  function clearError(input) {
+    if (!input) return;
+    input.classList.remove('has-error');
+    input.removeAttribute('aria-invalid');
+    var err = input.parentNode.querySelector('.field-error');
+    if (err) err.parentNode.removeChild(err);
+  }
 
-document.getElementById('form-success').style.display = 'block';
-document.getElementById('submit-btn').disabled = true;
-this.reset();
-});
+  function showError(input, msg) {
+    clearError(input);
+    input.classList.add('has-error');
+    input.setAttribute('aria-invalid', 'true');
+    var err = document.createElement('span');
+    err.className = 'field-error';
+    err.setAttribute('role', 'alert');
+    err.textContent = msg;
+    input.parentNode.appendChild(err);
+  }
+
+  // Clear a field's error as soon as the visitor starts correcting it
+  ['name', 'email', 'message'].forEach(function (id) {
+    var el = field(id);
+    if (el) el.addEventListener('input', function () { clearError(el); });
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = field('name'), email = field('email'),
+        subject = field('subject'), message = field('message');
+    [name, email, message].forEach(clearError);
+
+    var firstInvalid = null;
+    if (!name.value.trim()) {
+      showError(name, 'Please enter your name.'); firstInvalid = firstInvalid || name;
+    }
+    if (!email.value.trim()) {
+      showError(email, 'Please enter your email.'); firstInvalid = firstInvalid || email;
+    } else if (!emailRe.test(email.value.trim())) {
+      showError(email, 'Please enter a valid email address.'); firstInvalid = firstInvalid || email;
+    }
+    if (!message.value.trim()) {
+      showError(message, 'Please include a short message.'); firstInvalid = firstInvalid || message;
+    }
+    if (firstInvalid) { firstInvalid.focus(); return; }
+
+    var subj = subject.value.trim() || 'Portfolio Contact';
+    var body = encodeURIComponent('Name: ' + name.value.trim() + '\nEmail: ' + email.value.trim() + '\n\n' + message.value.trim());
+    window.location.href = 'mailto:alspsu@gmail.com?subject=' + encodeURIComponent(subj) + '&body=' + body;
+
+    if (successBox) successBox.style.display = 'block';
+    var submitBtn = document.getElementById('submit-btn');
+    if (submitBtn) submitBtn.disabled = true;
+    form.reset();
+  });
+})();
 </script>
 </body>
 </html>
