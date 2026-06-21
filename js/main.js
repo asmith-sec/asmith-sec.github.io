@@ -338,4 +338,45 @@
     });
   })();
 
+  /* ==================== v5 weekly additions (2026-06-19) ==================== */
+
+  // -- SEO + mobile polish: canonical link + theme-color meta --
+  (function dynamicMeta() {
+    // Canonical URL (no query/hash) helps search engines dedupe pages.
+    if (!document.querySelector('link[rel="canonical"]')) {
+      const link = document.createElement('link');
+      link.rel = 'canonical';
+      link.href = location.origin + location.pathname;
+      document.head.appendChild(link);
+    }
+
+    // theme-color keeps the mobile browser chrome in sync with the active theme.
+    let meta = document.querySelector('meta[name="theme-color"]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute('name', 'theme-color');
+      document.head.appendChild(meta);
+    }
+    const syncThemeColor = () => {
+      try {
+        const bg = getComputedStyle(document.body).backgroundColor;
+        if (bg) meta.setAttribute('content', bg);
+      } catch (e) { /* no-op */ }
+    };
+    syncThemeColor();
+    // Re-sync after a theme toggle (run on next tick so styles have applied).
+    document.querySelectorAll('[data-theme-toggle]').forEach(btn =>
+      btn.addEventListener('click', () => setTimeout(syncThemeColor, 0))
+    );
+  })();
+
+  // -- Keep the footer copyright year current (future-proofing) --
+  (function currentYear() {
+    const el = document.querySelector('.footer__copy');
+    if (!el) return;
+    const year = String(new Date().getFullYear());
+    // Only the leading "© YYYY" token is touched; the email span is preserved.
+    el.innerHTML = el.innerHTML.replace(/©\s*\d{4}/, '© ' + year);
+  })();
+
 })();
