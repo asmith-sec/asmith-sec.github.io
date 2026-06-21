@@ -450,3 +450,85 @@ pre:hover .copy-btn,
 @media (max-width: 640px) {
   .cred-cards { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ==================== v5 weekly additions (2026-06-19) ==================== */
+
+/* -- Contact form: inline validation feedback (a11y) -------- */
+.form-input.has-error,
+.form-textarea.has-error {
+  border-color: var(--color-critical, #e5534b) !important;
+}
+.field-error {
+  display: block;
+  margin-top: var(--space-2, 0.5rem);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs, 0.75rem);
+  line-height: 1.5;
+  color: var(--color-critical, #e5534b);
+}
+
+/* -- Print / "Save as PDF" stylesheet ----------------------- */
+/* Recruiters often print or save a portfolio page; this gives a clean,
+   ink-friendly, light rendering regardless of the on-screen theme. */
+@media print {
+  /* Force a light, high-contrast palette for paper */
+  :root,
+  [data-theme="dark"],
+  [data-theme="light"] {
+    --color-bg: #ffffff;
+    --color-surface: #ffffff;
+    --color-surface-2: #ffffff;
+    --color-text: #111111;
+    --color-text-muted: #333333;
+    --color-text-faint: #555555;
+    --color-border: #cccccc;
+    --color-primary: #1f4e8c;
+    --color-primary-hover: #1f4e8c;
+    --color-primary-bg: #ffffff;
+    --color-primary-border: #cccccc;
+  }
+
+  html, body { background: #ffffff !important; color: #111111 !important; }
+
+  /* Drop effects that waste ink or don't translate to paper */
+  *, *::before, *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+    background-image: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide interactive chrome that has no meaning on paper */
+  .nav, .nav__mobile, .nav__hamburger, .nav__actions,
+  .scroll-progress, .back-to-top, .skip-link, .copy-btn,
+  .hero__cta, .footer__links, .badge-side,
+  [data-theme-toggle] { display: none !important; }
+
+  /* Open up the layout so content fills the page */
+  .container { max-width: 100% !important; width: 100% !important; padding: 0 !important; }
+  .section, .hero, .hero--credential { padding-block: 1rem !important; }
+
+  /* Reveal any not-yet-animated fade-in content before printing */
+  .fade-in { opacity: 1 !important; transform: none !important; }
+
+  /* Print external URLs after their link text so they're not lost on paper */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555555;
+    word-break: break-all;
+  }
+  /* ...but keep buttons / in-card links clean */
+  .btn::after, .card__link::after, .badge a::after { content: "" !important; }
+
+  /* Avoid breaking key blocks across pages */
+  .card, .cred-card, .script-card, .cert-card, .badge {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 1px solid #cccccc !important;
+  }
+  h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+}
