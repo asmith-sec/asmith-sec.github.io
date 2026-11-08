@@ -1,0 +1,7 @@
+# security.txt for https://asmith-sec.github.io (RFC 9116)
+# Vulnerability disclosure contact for this site.
+
+Contact: mailto:alspsu@gmail.com
+Expires: 2027-07-10T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://asmith-sec.github.io/.well-known/security.txt
