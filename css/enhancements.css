@@ -532,3 +532,1228 @@ pre:hover .copy-btn,
   }
   h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
 }
+
+/* ==================== v7 weekly additions (2026-07-03) ==================== */
+
+/* -- Keyboard focus rings: clear, theme-aware, keyboard-only -- */
+/* :focus-visible only fires for keyboard/assistive-tech focus, so mouse
+   clicks stay clean while keyboard users get an obvious teal/blue ring. */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+.skip-link:focus-visible { outline-offset: 2px; }
+/* Buttons/links already tint on focus — keep the ring tight on those */
+.btn:focus-visible,
+.badge-side a:focus-visible,
+.nav__links a:focus-visible { outline-offset: 4px; }
+
+/* -- Command palette (Cmd/Ctrl+K or "/") ------------------- */
+.cmdk-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(1rem, 12vh, 8rem) 1rem 1rem;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+.cmdk-overlay.is-open { opacity: 1; }
+.cmdk-overlay[hidden] { display: none; }
+
+.cmdk {
+  width: min(560px, 100%);
+  background: var(--color-surface);
+  border: 1px solid var(--color-primary-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg), var(--glow);
+  overflow: hidden;
+  transform: translateY(-8px) scale(0.98);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-mono);
+}
+.cmdk-overlay.is-open .cmdk { transform: translateY(0) scale(1); }
+
+.cmdk__prompt {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+.cmdk__prompt::before {
+  content: "$";
+  color: var(--color-primary);
+  font-weight: 700;
+}
+.cmdk__input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+}
+.cmdk__input::placeholder { color: var(--color-text-faint); }
+
+.cmdk__list {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-2);
+  max-height: 46vh;
+  overflow-y: auto;
+}
+.cmdk__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  scroll-margin: var(--space-2);
+}
+.cmdk__kind {
+  margin-left: auto;
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.cmdk__item[aria-selected="true"],
+.cmdk__item:hover {
+  background: var(--color-primary-bg);
+  color: var(--color-text);
+}
+.cmdk__item[aria-selected="true"] { box-shadow: inset 2px 0 0 var(--color-primary); }
+.cmdk__empty {
+  padding: var(--space-4) var(--space-3);
+  color: var(--color-text-faint);
+  font-size: var(--text-sm);
+}
+
+.cmdk__foot {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  padding: var(--space-2) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+}
+.cmdk__foot kbd {
+  font-family: var(--font-mono);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 4px);
+  padding: 0 0.35em;
+  margin-right: 0.15em;
+}
+
+/* Count-up stats: keep digit width steady so it doesn't jitter */
+.cred-card .num[data-countup] { font-variant-numeric: tabular-nums; }
+
+/* ==================== v8 weekly additions (2026-07-10) ==================== */
+
+/* ── Command-palette hint chip (desktop nav) ─────────────── */
+.cmdk-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 5px 8px;
+  background: transparent;
+  border: 1px solid var(--color-border, rgba(148, 163, 184, 0.25));
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.cmdk-hint kbd {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+.cmdk-hint:hover,
+.cmdk-hint:focus-visible {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+@media (max-width: 900px) {
+  .cmdk-hint { display: none; } /* mobile uses the hamburger; shortcut chip is desktop-only */
+}
+@media print {
+  .cmdk-hint { display: none !important; }
+}
+
+/* ==================== v9 weekly additions (2026-07-17) ==================== */
+
+/* -- Toast: small, accessible confirmation for copy actions --- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: clamp(1rem, 4vw, 2rem);
+  transform: translateX(-50%) translateY(12px);
+  z-index: 500;
+  max-width: min(90vw, 440px);
+  padding: 0.6rem 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--color-bg);
+  background: var(--color-primary);
+  border-radius: var(--radius-md, 8px);
+  box-shadow: var(--shadow-lg), var(--glow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* -- Footer email: signal that it is click-to-copy --- */
+.copy-email { cursor: pointer; }
+.copy-email:hover,
+.copy-email:focus-visible {
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+
+/* -- Projects: per-case-study "copy link" button --- */
+.card-link-btn {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--color-text-faint);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 6px);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-2px);
+  transition: opacity var(--transition), color var(--transition),
+              border-color var(--transition), transform var(--transition);
+  z-index: 2;
+}
+.card:hover .card-link-btn,
+.card-link-btn:focus-visible { opacity: 1; transform: translateY(0); }
+.card-link-btn:hover { color: var(--color-primary); border-color: var(--color-primary); }
+
+/* Touch devices have no hover — keep the button reachable */
+@media (hover: none) {
+  .card-link-btn { opacity: 1; }
+}
+
+@media print {
+  .toast, .card-link-btn { display: none !important; }
+}
+
+/* ==================== v10 weekly additions (2026-07-24) ==================== */
+
+/* -- Deep-link anchor offset: targets clear the sticky nav (+ filter bar) --- */
+/* Pairs with the --anchor-offset variable main.js measures at runtime (falls
+   back to a sensible default if the script hasn't run). scroll-margin-top only
+   affects hash/anchor and focus scrolling, so normal scrolling is unaffected. */
+:target,
+#projects-grid > .card,
+.section[id],
+#main-content {
+  scroll-margin-top: calc(var(--anchor-offset, 72px) + 14px);
+}
+
+/* Smooth in-page jumps — only for visitors who haven't asked for reduced
+   motion (the reduced-motion block above already forces scroll-behavior: auto). */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* -- Windows High Contrast / forced-colors support for injected UI --------- */
+/* In forced-colors mode the browser replaces authored colours with system
+   colours; custom backgrounds/shadows are dropped. These rules keep the
+   JS-injected components visible and correctly bordered using system colours. */
+@media (forced-colors: active) {
+  .scroll-progress { background: Highlight; box-shadow: none; }
+
+  .back-to-top {
+    background: ButtonFace;
+    color: ButtonText;
+    border: 1px solid ButtonBorder;
+    box-shadow: none;
+  }
+
+  .toast {
+    background: Canvas;
+    color: CanvasText;
+    border: 1px solid CanvasText;
+    box-shadow: none;
+  }
+
+  .cmdk { border: 1px solid CanvasText; box-shadow: none; }
+  .cmdk__item[aria-selected="true"],
+  .cmdk__item:hover {
+    background: Highlight;
+    color: HighlightText;
+    box-shadow: none;
+  }
+
+  .cmdk-hint,
+  .copy-btn,
+  .card-link-btn {
+    background: ButtonFace;
+    color: ButtonText;
+    border: 1px solid ButtonBorder;
+    opacity: 1;
+  }
+  .cmdk-hint:hover, .cmdk-hint:focus-visible,
+  .copy-btn:hover, .copy-btn:focus-visible,
+  .card-link-btn:hover, .card-link-btn:focus-visible {
+    color: LinkText;
+    border-color: LinkText;
+  }
+
+  :focus-visible { outline: 2px solid Highlight; outline-offset: 3px; }
+}
+
+/* ==================== v11 weekly additions (2026-08-02) ==================== */
+
+/* -- Screen-reader-only utility (used by the external-link cue) ------------- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* -- External-link affordance: small "opens in new tab" glyph --------------- */
+.ext-icon {
+  display: inline-block;
+  width: 0.72em;
+  height: 0.72em;
+  margin-left: 0.28em;
+  vertical-align: baseline;
+  opacity: 0.6;
+  transition: opacity var(--transition), transform var(--transition);
+}
+a:hover .ext-icon,
+a:focus-visible .ext-icon { opacity: 1; transform: translate(1px, -1px); }
+@media print { .ext-icon { display: none !important; } } /* print already appends the URL */
+
+/* -- Keyboard shortcuts help overlay ("?") --------------------------------- */
+/* Shares the command-palette visual language (surface, blur, teal border). */
+.help-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(1rem, 12vh, 8rem) 1rem 1rem;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+.help-overlay.is-open { opacity: 1; }
+.help-overlay[hidden] { display: none; }
+
+.help {
+  width: min(460px, 100%);
+  background: var(--color-surface);
+  border: 1px solid var(--color-primary-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg), var(--glow);
+  overflow: hidden;
+  font-family: var(--font-mono);
+  transform: translateY(-8px) scale(0.98);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.help-overlay.is-open .help { transform: translateY(0) scale(1); }
+
+.help__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+}
+.help__close {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 4px);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 0.15rem 0.5rem;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+}
+.help__close:hover,
+.help__close:focus-visible { color: var(--color-primary); border-color: var(--color-primary); }
+
+.help__rows { padding: var(--space-2) var(--space-3); }
+.help__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-2);
+}
+.help__keys {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 4px;
+  min-width: 96px;
+}
+.help__desc { color: var(--color-text-muted); font-size: var(--text-sm); }
+.help kbd {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.6;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 4px);
+  padding: 0.1em 0.45em;
+  color: var(--color-text);
+}
+.help__foot {
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+}
+
+@media print { .help-overlay { display: none !important; } }
+
+@media (forced-colors: active) {
+  .help { border: 1px solid CanvasText; box-shadow: none; }
+  .help__close {
+    background: ButtonFace;
+    color: ButtonText;
+    border: 1px solid ButtonBorder;
+  }
+  .help__close:hover,
+  .help__close:focus-visible { color: LinkText; border-color: LinkText; }
+}
+
+/* ==================== v12 weekly additions (2026-08-07) ==================== */
+
+/* -- Projects filter: live result count + empty state --------------- */
+.filter-status {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-6);
+}
+
+.filter-empty {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-10) var(--space-6);
+  text-align: center;
+  margin-top: var(--space-6);
+}
+
+.filter-empty[hidden] { display: none; }
+
+/* Cards hidden by the page's filter were still reachable by Tab and still
+   read by screen readers (the inline rule only sets opacity/position).
+   `visibility` removes them from the tab order and the a11y tree, delayed so
+   the existing fade-out still plays. ID-scoped so it wins over the page's
+   own inline <style> block without touching that markup. */
+#projects-grid .project-item {
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s;
+}
+
+#projects-grid .project-item.hidden {
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #projects-grid .project-item,
+  #projects-grid .project-item.hidden { transition: none; }
+}
+
+/* -- Contact: "Save Contact Card" (.vcf) button --------------------- */
+.vcard-btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: var(--space-3);
+}
+
+@media print {
+  .vcard-btn { display: none !important; }
+  .filter-empty { display: none !important; }
+}
+
+@media (forced-colors: active) {
+  .filter-empty { border: 1px dashed CanvasText; }
+  .vcard-btn {
+    background: ButtonFace;
+    color: ButtonText;
+    border: 1px solid ButtonBorder;
+  }
+  .vcard-btn:hover,
+  .vcard-btn:focus-visible { color: LinkText; border-color: LinkText; }
+}
+
+/* ==================== v13 weekly additions (2026-08-14) ==================== */
+
+/* -- Breadcrumb trail (inner pages) --------------------------------- */
+.breadcrumb {
+  margin-bottom: var(--space-4);
+}
+
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+}
+
+.breadcrumb__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.breadcrumb__link {
+  color: var(--color-text-faint);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.breadcrumb__link:hover,
+.breadcrumb__link:focus-visible {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.breadcrumb__sep {
+  color: var(--color-border);
+}
+
+.breadcrumb__current {
+  color: var(--color-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* -- Scripts page: live filter ------------------------------------- */
+.script-filter {
+  margin-bottom: var(--space-8);
+}
+
+.script-filter__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-3);
+}
+
+.script-filter__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.script-filter__icon {
+  position: absolute;
+  left: var(--space-4);
+  color: var(--color-text-faint);
+  pointer-events: none;
+}
+
+.script-filter__input {
+  width: 100%;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.7rem 2.6rem 0.7rem 2.6rem;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.script-filter__input::placeholder { color: var(--color-text-faint); }
+
+/* The browser's own search "x" would sit on top of our accessible clear button */
+.script-filter__input::-webkit-search-cancel-button,
+.script-filter__input::-webkit-search-decoration { -webkit-appearance: none; appearance: none; }
+
+.script-filter__input:hover { border-color: var(--color-primary-border); }
+
+.script-filter__input:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--glow);
+}
+
+.script-filter__clear {
+  position: absolute;
+  right: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm, 6px);
+  color: var(--color-text-faint);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.script-filter__clear:hover,
+.script-filter__clear:focus-visible {
+  color: var(--color-primary);
+  border-color: var(--color-primary-border);
+}
+
+.script-filter__clear[hidden] { display: none; }
+
+.script-filter__status {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--color-text-faint);
+  margin: var(--space-3) 0 0;
+}
+
+.script-filter__empty {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10) var(--space-6);
+  text-align: center;
+  margin-top: var(--space-6);
+}
+
+.script-filter__empty[hidden] { display: none; }
+
+/* Filtered-out cards are removed outright — no tab order, no a11y tree. */
+.script-card[hidden] { display: none !important; }
+
+/* A filtered card that never scrolled into view still needs to be opaque. */
+.script-card.fade-in.visible { opacity: 1; }
+
+@media print {
+  /* Navigation and controls carry no meaning on paper; the trail does. */
+  .script-filter { display: none !important; }
+  .script-filter__empty { display: none !important; }
+  .breadcrumb__list { font-size: 9pt; }
+  .breadcrumb__link { color: #000; }
+}
+
+@media (forced-colors: active) {
+  .breadcrumb__link { color: LinkText; }
+  .breadcrumb__current { color: CanvasText; }
+  .breadcrumb__sep { color: CanvasText; }
+  .script-filter__input {
+    background: Field;
+    color: FieldText;
+    border: 1px solid CanvasText;
+  }
+  .script-filter__input:focus { border-color: Highlight; }
+  .script-filter__clear { color: ButtonText; border: 1px solid ButtonBorder; }
+  .script-filter__clear:hover,
+  .script-filter__clear:focus-visible { color: LinkText; border-color: LinkText; }
+  .script-filter__empty { border: 1px dashed CanvasText; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breadcrumb__link,
+  .script-filter__input,
+  .script-filter__clear { transition: none; }
+}
+
+/* ==================== v14 weekly additions (2026-08-21) ==================== */
+
+/* -- Scripts page: per-script "copy link" button (beside each title) -------- */
+/* Mirrors the v9 Projects copy-link affordance, but sits inline next to the
+   script title so it never collides with the card's tag row. Reveals on card
+   hover / keyboard focus; stays visible on touch (no hover) and in forced
+   colors. Uses only tokens already defined earlier in this file. */
+.script-card__share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  margin-left: var(--space-2);
+  padding: 0;
+  color: var(--color-text-faint);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm, 6px);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-1px);
+  transition: opacity var(--transition), color var(--transition),
+              border-color var(--transition), transform var(--transition);
+}
+.script-card:hover .script-card__share,
+.script-card__share:focus-visible,
+.script-card__share.is-copied { opacity: 1; transform: translateY(0); }
+.script-card__share:hover { color: var(--color-primary); border-color: var(--color-primary-border); }
+.script-card__share.is-copied { color: var(--color-accent-green); border-color: var(--color-accent-green-border); }
+
+/* Touch devices have no hover — keep the button reachable. */
+@media (hover: none) {
+  .script-card__share { opacity: 1; transform: none; }
+}
+
+@media print {
+  .script-card__share { display: none !important; }
+}
+
+@media (forced-colors: active) {
+  .script-card__share {
+    color: ButtonText;
+    border: 1px solid ButtonBorder;
+    opacity: 1;
+  }
+  .script-card__share:hover,
+  .script-card__share:focus-visible { color: LinkText; border-color: LinkText; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .script-card__share { transition: none; }
+}
+
+/* ==================== v15 weekly additions (2026-08-28) ==================== */
+
+/* Certifications page: "copy link" button beside each credential's name.
+   Mirrors the v14 .script-card__share treatment so the deep-link affordance is
+   visually identical across the Projects, Scripts and Certifications pages. */
+.cert-card__share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  margin-left: var(--space-2);
+  padding: 0;
+  color: var(--color-text-faint);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm, 6px);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-1px);
+  transition: opacity var(--transition), color var(--transition),
+              border-color var(--transition), transform var(--transition);
+}
+.cert-card:hover .cert-card__share,
+.cert-card__share:focus-visible,
+.cert-card__share.is-copied { opacity: 1; transform: translateY(0); }
+.cert-card__share:hover { color: var(--color-primary); border-color: var(--color-primary-border); }
+.cert-card__share.is-copied { color: var(--color-accent-green); border-color: var(--color-accent-green-border); }
+
+/* Touch devices have no hover — keep the button reachable. */
+@media (hover: none) {
+  .cert-card__share { opacity: 1; transform: none; }
+}
+
+@media print {
+  .cert-card__share { display: none !important; }
+}
+
+@media (forced-colors: active) {
+  .cert-card__share {
+    color: ButtonText;
+    border: 1px solid ButtonBorder;
+    opacity: 1;
+  }
+  .cert-card__share:hover,
+  .cert-card__share:focus-visible { color: LinkText; border-color: LinkText; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-card__share { transition: none; }
+}
+
+/* ==================== v16 weekly additions (2026-09-04) ==================== */
+
+/* Section-header "copy link" button beside each .section-header__title.
+   Mirrors the v14/v15 .script-card__share / .cert-card__share treatment so the
+   deep-link affordance is visually identical everywhere it appears. Reveals on
+   hover of the heading (or keyboard focus of the button). */
+.section-header__share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  margin-left: var(--space-2);
+  padding: 0;
+  color: var(--color-text-faint);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm, 6px);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-1px);
+  transition: opacity var(--transition), color var(--transition),
+              border-color var(--transition), transform var(--transition);
+}
+.section-header__title:hover .section-header__share,
+.section-header__share:focus-visible,
+.section-header__share.is-copied { opacity: 1; transform: translateY(0); }
+.section-header__share:hover { color: var(--color-primary); border-color: var(--color-primary-border); }
+.section-header__share.is-copied { color: var(--color-accent-green); border-color: var(--color-accent-green-border); }
+
+/* Touch devices have no hover — keep the button reachable. */
+@media (hover: none) {
+  .section-header__share { opacity: 1; transform: none; }
+}
+
+@media print {
+  .section-header__share { display: none !important; }
+}
+
+@media (forced-colors: active) {
+  .section-header__share {
+    color: ButtonText;
+    border: 1px solid ButtonBorder;
+    opacity: 1;
+  }
+  .section-header__share:hover,
+  .section-header__share:focus-visible { color: LinkText; border-color: LinkText; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-header__share { transition: none; }
+}
+
+/* ==================== v17 weekly additions (2026-09-11) ==================== */
+
+/* -- Certifications: at-a-glance credential summary strip ----------------- */
+/* Small monospace line under the page intro; counts are derived from the cards
+   at runtime by main.js. Uses only tokens already defined earlier in the file. */
+.cert-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-3);
+  margin-top: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+.cert-summary__item { display: inline-flex; align-items: baseline; gap: 0.35em; }
+.cert-summary__count { color: var(--color-text); font-weight: 700; font-size: var(--text-sm); }
+.cert-summary__sep { color: var(--color-border); }
+
+/* -- Certifications: live filter (mirrors the v13 .script-filter language) - */
+.cert-filter { margin-bottom: var(--space-8); }
+
+.cert-filter__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-3);
+}
+
+.cert-filter__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cert-filter__icon {
+  position: absolute;
+  left: var(--space-4);
+  color: var(--color-text-faint);
+  pointer-events: none;
+}
+
+.cert-filter__input {
+  width: 100%;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.7rem 2.6rem 0.7rem 2.6rem;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cert-filter__input::placeholder { color: var(--color-text-faint); }
+
+/* The browser's own search "x" would sit on top of our accessible clear button */
+.cert-filter__input::-webkit-search-cancel-button,
+.cert-filter__input::-webkit-search-decoration { -webkit-appearance: none; appearance: none; }
+
+.cert-filter__input:hover { border-color: var(--color-primary-border); }
+
+.cert-filter__input:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--glow);
+}
+
+.cert-filter__clear {
+  position: absolute;
+  right: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm, 6px);
+  color: var(--color-text-faint);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.cert-filter__clear:hover,
+.cert-filter__clear:focus-visible {
+  color: var(--color-primary);
+  border-color: var(--color-primary-border);
+}
+
+.cert-filter__clear[hidden] { display: none; }
+
+.cert-filter__status {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--color-text-faint);
+  margin: var(--space-3) 0 0;
+}
+
+.cert-filter__empty {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10) var(--space-6);
+  text-align: center;
+  margin-top: var(--space-6);
+}
+
+.cert-filter__empty[hidden] { display: none; }
+
+/* Filtered-out cards and emptied groups are removed outright — no tab stop, no
+   a11y tree entry — so the role="list" count stays accurate as you filter. */
+.cert-card[hidden],
+.cert-grid[hidden],
+.section-header[hidden] { display: none !important; }
+
+/* A filtered card that never scrolled into view still needs to be opaque.
+   (Planned cards carry an inline opacity:0.7 that intentionally wins over this.) */
+.cert-card.fade-in.visible { opacity: 1; }
+
+@media print {
+  .cert-filter { display: none !important; }
+  .cert-filter__empty { display: none !important; }
+}
+
+@media (forced-colors: active) {
+  .cert-summary__count { color: CanvasText; }
+  .cert-summary__sep { color: CanvasText; }
+  .cert-filter__input {
+    background: Field;
+    color: FieldText;
+    border: 1px solid CanvasText;
+  }
+  .cert-filter__input:focus { border-color: Highlight; }
+  .cert-filter__clear { color: ButtonText; border: 1px solid ButtonBorder; }
+  .cert-filter__clear:hover,
+  .cert-filter__clear:focus-visible { color: LinkText; border-color: LinkText; }
+  .cert-filter__empty { border: 1px dashed CanvasText; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-filter__input,
+  .cert-filter__clear { transition: none; }
+}
+
+/* ==================== v18 weekly additions (2026-09-18) ==================== */
+
+/* -- On-page section navigation rail (scroll-spy) -------------------------- */
+/* A compact vertical rail of dots on the right edge of the long, multi-section
+   pages (home + certifications). Desktop-only: the wide + fine-pointer query at
+   the bottom is what actually reveals it, so narrow and touch layouts — where it
+   would crowd the content — get nothing. Uses only tokens already defined above. */
+.section-nav {
+  position: fixed;
+  top: 50%;
+  right: clamp(0.6rem, 1.6vw, 1.4rem);
+  transform: translateY(-50%);
+  z-index: 140;                 /* below back-to-top (150), palette/help (400), toast (500) */
+  display: none;                /* enabled only in the wide + fine-pointer query below */
+}
+.section-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-end;
+}
+.section-nav__item { display: block; }
+.section-nav__item[hidden] { display: none; }
+
+.section-nav__dot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 22px;
+  height: 18px;
+  text-decoration: none;
+}
+.section-nav__dot::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px solid var(--color-text-faint);
+  transition: background var(--transition), border-color var(--transition),
+              transform var(--transition);
+}
+.section-nav__dot:hover::after,
+.section-nav__dot:focus-visible::after {
+  border-color: var(--color-primary);
+  transform: scale(1.15);
+}
+.section-nav__dot.is-active::after {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: var(--glow);
+}
+
+/* Hover / keyboard-focus label chip, sitting to the left of the dot. */
+.section-nav__label {
+  position: absolute;
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%) translateX(4px);
+  white-space: nowrap;
+  padding: 0.25rem 0.55rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 6px);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition);
+}
+.section-nav__dot:hover .section-nav__label,
+.section-nav__dot:focus-visible .section-nav__label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Only on wide screens with a fine pointer (mouse) — never crowds mobile/tablet. */
+@media (min-width: 1280px) and (hover: hover) and (pointer: fine) {
+  .section-nav { display: block; }
+}
+
+@media print { .section-nav { display: none !important; } }
+
+@media (forced-colors: active) {
+  .section-nav__dot::after { border-color: ButtonText; }
+  .section-nav__dot:hover::after,
+  .section-nav__dot:focus-visible::after { border-color: Highlight; }
+  .section-nav__dot.is-active::after {
+    background: Highlight;
+    border-color: Highlight;
+    box-shadow: none;
+  }
+  .section-nav__label {
+    background: Canvas;
+    color: CanvasText;
+    border: 1px solid CanvasText;
+    box-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-nav__dot::after,
+  .section-nav__label { transition: none; }
+}
+
+/* -- Print-only identity letterhead (inner pages) ------------------------- */
+/* Hidden entirely on screen; appears only on paper / PDF so a single printed page
+   still says whose portfolio it is. Pairs with the v5 print stylesheet, which has
+   already forced a light, ink-friendly palette by the time this renders. */
+.print-letterhead { display: none; }
+
+@media print {
+  .print-letterhead {
+    display: block;
+    margin: 0 0 12pt;
+    padding: 0 0 8pt;
+    border-bottom: 1px solid #999999;
+    font-family: var(--font-mono);
+  }
+  .print-letterhead__name {
+    display: block;
+    font-size: 13pt;
+    font-weight: 700;
+    color: #111111;
+  }
+  .print-letterhead__meta {
+    display: block;
+    margin-top: 3pt;
+    font-size: 9pt;
+    color: #333333;
+  }
+}
+
+/* ==================== v19 weekly additions (2026-09-25) ==================== */
+
+/* -- Certifications: status quick-filter chips ------------------------------ */
+/* Toggle chips that just set the existing v17 filter box's value and let it do
+   the matching (see js/main.js's certQuickFilters). Visual language reuses the
+   site's existing pill/chip look and only tokens already defined above. */
+.cert-quick-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 var(--space-6);
+}
+
+.cert-quick-filters__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-3);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.cert-quick-filters__chip:hover,
+.cert-quick-filters__chip:focus-visible {
+  border-color: var(--color-primary-border);
+  color: var(--color-text);
+  outline: none;
+}
+
+.cert-quick-filters__chip.is-active {
+  color: var(--color-primary);
+  background: var(--color-primary-bg);
+  border-color: var(--color-primary-border);
+  box-shadow: var(--glow);
+}
+
+.cert-quick-filters__count {
+  font-weight: 700;
+  color: inherit;
+  opacity: 0.75;
+}
+
+@media (forced-colors: active) {
+  .cert-quick-filters__chip { border: 1px solid ButtonBorder; color: ButtonText; }
+  .cert-quick-filters__chip.is-active { border-color: Highlight; color: Highlight; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-quick-filters__chip { transition: none; }
+}
+
+@media print {
+  .cert-quick-filters { display: none !important; }
+}
+
+
+/* v20: brief highlight on the element a #hash link lands on */
+@keyframes target-flash-kf {
+  0%   { outline-color: var(--color-primary); box-shadow: var(--glow); }
+  100% { outline-color: transparent; box-shadow: none; }
+}
+.target-flash {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 6px;
+  border-radius: var(--radius-sm, 6px);
+  animation: target-flash-kf 1.6s ease-out forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .target-flash { animation: none; outline-color: transparent; }
+}
+
+/* v21 (2026-10-09): higher-contrast preference — stronger borders & link underlines */
+@media (prefers-contrast: more) {
+  :root { --color-border: currentColor; }
+  a { text-decoration: underline; }
+  .card, .project-card, .cert-card, .terminal { border-color: currentColor; }
+}
