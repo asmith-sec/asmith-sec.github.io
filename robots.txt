@@ -1,0 +1,6 @@
+# robots.txt — asmith-sec.github.io
+# Allow all well-behaved crawlers to index the whole portfolio.
+User-agent: *
+Allow: /
+
+Sitemap: https://asmith-sec.github.io/sitemap.xml

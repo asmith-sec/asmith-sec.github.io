@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found · Anthony Smith</title>
+<meta name="description" content="The page you were looking for could not be found on Anthony Smith's security portfolio.">
+<meta name="robots" content="noindex">
+<!-- Root-absolute paths so this 404 renders correctly no matter how deep the bad URL was -->
+<link rel="stylesheet" href="/css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ── Navigation (root-absolute links) ───────────────────── -->
+<nav class="nav" id="main-nav">
+<div class="container">
+<div class="nav__inner">
+<a href="/index.html" class="nav__logo" aria-label="Anthony Smith home">
+<svg class="nav__logo-svg" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+<path d="M16 2L4 7v9c0 6.627 5.099 11.995 12 13 6.901-1.005 12-6.373 12-13V7L16 2z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"/>
+<path d="M16 4L6 8.5v7.5c0 5.523 4.25 9.996 10 10.995 5.75-.999 10-5.472 10-10.995V8.5L16 4z" fill="var(--color-primary)" opacity="0.12"/>
+<path d="M16 4L6 8.5v7.5c0 5.523 4.25 9.996 10 10.995 5.75-.999 10-5.472 10-10.995V8.5L16 4z" stroke="var(--color-primary)" stroke-width="1.5" fill="none"/>
+<circle cx="16" cy="16" r="2.5" fill="var(--color-primary)"/>
+<path d="M16 10v3.5M16 18.5V22M10 16h3.5M18.5 16H22" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
+<span class="nav__logo-text">anthony<span>.</span>smith</span>
+</a>
+
+<ul class="nav__links" role="list">
+<li><a href="/index.html">Home</a></li>
+<li><a href="/pages/projects.html">Projects</a></li>
+<li><a href="/pages/scripts.html">Scripts</a></li>
+<li><a href="/pages/certifications.html">Certs</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+</ul>
+
+<div class="nav__actions">
+<button class="btn-ghost" data-theme-toggle aria-label="Toggle dark mode">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+</svg>
+</button>
+<a href="/assets/Anthony-Smith-CV_Q3.docx" download class="btn btn--primary">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+Resume
+</a>
+</div>
+
+<button class="nav__hamburger" id="nav-hamburger" aria-label="Open navigation" aria-expanded="false">
+<span></span><span></span><span></span>
+</button>
+</div>
+
+<nav class="nav__mobile" id="nav-mobile" aria-label="Mobile navigation">
+<a href="/index.html">Home</a>
+<a href="/pages/projects.html">Projects</a>
+<a href="/pages/scripts.html">Scripts</a>
+<a href="/pages/certifications.html">Certifications</a>
+<a href="/pages/contact.html">Contact</a>
+<a href="/assets/Anthony-Smith-CV_Q3.docx" download style="color:var(--color-primary);">Download Resume</a>
+</nav>
+</div>
+</nav>
+
+<!-- ── 404 hero ───────────────────────────────────────────── -->
+<main id="main-content">
+<section class="hero" style="min-height:auto; padding-block: clamp(3rem, 10vw, 7rem);">
+<div class="container" style="max-width: 760px;">
+
+<div class="fade-in">
+<p class="section-header__label" style="color: var(--color-primary);">// error 404</p>
+
+<!-- Terminal-style panel (static; no id="terminal-body" so the typewriter stays off) -->
+<div role="img" aria-label="Terminal showing: command not found, status 404 page not found"
+     style="margin-top: var(--space-6); border:1px solid var(--color-border); border-radius: var(--radius-lg, 10px); background: var(--color-surface); box-shadow: var(--shadow-md); overflow:hidden;">
+  <div style="display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--color-border);">
+    <span style="width:11px;height:11px;border-radius:50%;background:#e5534b;display:inline-block;"></span>
+    <span style="width:11px;height:11px;border-radius:50%;background:var(--color-accent-gold, #d9a857);display:inline-block;"></span>
+    <span style="width:11px;height:11px;border-radius:50%;background:var(--color-accent-green, #6fc196);display:inline-block;"></span>
+    <span class="font-mono" style="margin-left:8px; font-size: var(--text-xs); color: var(--color-text-muted);">anthony.smith — bash</span>
+  </div>
+  <div class="font-mono" style="padding: var(--space-6); font-size: var(--text-sm); line-height: 2; color: var(--color-text-muted); overflow-x:auto;">
+    <div style="color: var(--color-primary);">$ locate <span style="color: var(--color-text);">requested-page</span></div>
+    <div style="color:#e5534b;">locate: 0 results — resource not found</div>
+    <div style="color: var(--color-primary);">$ echo $?</div>
+    <div style="color: var(--color-text);">404</div>
+    <div style="color: var(--color-primary);">$ <span class="terminal__cursor" style="display:inline-block;width:8px;height:1.1em;background:var(--color-primary);vertical-align:text-bottom;"></span></div>
+  </div>
+</div>
+
+<h1 style="font-family: var(--font-mono); font-size: var(--text-2xl); font-weight: 700; color: var(--color-text); margin-top: var(--space-8); margin-bottom: var(--space-4);">
+  This page wandered off the network.
+</h1>
+<p style="color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--space-8);">
+  The link may be broken or the page may have moved. No packets were harmed.
+  Here are some known-good routes back into the site:
+</p>
+
+<div class="hero__cta" style="flex-wrap: wrap; gap: var(--space-3);">
+  <a href="/index.html" class="btn btn--primary">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 9.5L12 3l9 6.5"/><path d="M5 9v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"/></svg>
+    Home
+  </a>
+  <a href="/pages/projects.html" class="btn btn--outline">Projects</a>
+  <a href="/pages/scripts.html" class="btn btn--outline">Scripts</a>
+  <a href="/pages/certifications.html" class="btn btn--outline">Certifications</a>
+  <a href="/pages/contact.html" class="btn btn--outline">Contact</a>
+</div>
+</div>
+
+</div>
+</section>
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer class="footer">
+<div class="container">
+<div class="footer__inner">
+<p class="footer__copy">© 2026 Anthony Smith · Philadelphia, PA · <span class="text-primary">alspsu@gmail.com</span></p>
+<div class="footer__links">
+<a href="https://linkedin.com/in/anthony-smith" target="_blank" rel="noopener">LinkedIn</a>
+<a href="/pages/projects.html">Projects</a>
+<a href="/pages/scripts.html">Scripts</a>
+<a href="/pages/contact.html">Contact</a>
+</div>
+</div>
+</div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
