@@ -1248,9 +1248,15 @@
     // rewriteResumeLinks pass above runs first and REMOVES the `download`
     // attribute (it points the link at the PDF and opens it in a tab), so we
     // match on the resume filename first and only fall back to [download].
-    const resumeBtn = document.querySelector('a.btn[href*="Anthony-Smith-Resume"]') ||
-                      document.querySelector('a[href*="Anthony-Smith-Resume"]') ||
-                      document.querySelector('a[download]');
+    // Skip links inside the site nav/header/footer so the button lands in the
+    // page body (next to "Download Resume"), not in the top nav bar.
+    const inChrome = function (el) {
+      return !!(el.closest && el.closest('nav, header, footer, .nav, .footer'));
+    };
+    const resumeBtn = Array.prototype.filter.call(
+      document.querySelectorAll('a[href*="Anthony-Smith-Resume"], a[download]'),
+      function (el) { return !inChrome(el); }
+    )[0];
     if (!resumeBtn || !resumeBtn.parentNode) return;
 
     function ldPerson() {
