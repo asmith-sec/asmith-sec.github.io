@@ -257,10 +257,11 @@
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: 'Anthony Smith',
-      jobTitle: 'Junior Security Engineer',
+      jobTitle: 'Security Engineer',
       url: 'https://asmith-sec.github.io/',
       email: 'mailto:alspsu@gmail.com',
-      address: { '@type': 'PostalAddress', addressLocality: 'Philadelphia', addressRegion: 'PA' },
+      address: { '@type': 'PostalAddress', addressRegion: 'NJ', addressCountry: 'US' },
+      areaServed: ['Philadelphia, PA', 'New Jersey'],
       sameAs: [
         'https://www.linkedin.com/in/anthony-smith-6a453a89',
         'https://github.com/asmith-sec'
@@ -1756,7 +1757,7 @@
       m.setAttribute('name', n); m.setAttribute('content', c); head.appendChild(m);
     }
 
-    const ALT = 'Anthony Smith — Junior Security Engineer · security portfolio preview card';
+    const ALT = 'Anthony Smith — Security Engineer · security portfolio preview card';
     addProp('og:locale', 'en_US');
     addProp('og:image:alt', ALT);
     addName('twitter:image:alt', ALT);
