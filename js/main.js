@@ -274,6 +274,53 @@
     document.head.appendChild(s);
   })();
 
+  // -- v26 (2026-11-13) A11y: one <main> landmark per page --------
+  // The home page had no <main>, and on inner pages the page header (h1, intro,
+  // breadcrumb, filter bar) sat outside it, so "jump to main" in a screen reader
+  // skipped the title. Wrap everything between the top nav and the footer in a
+  // single <main>; a pre-existing <main> becomes a plain <div> with the same
+  // classes so layout is unchanged. Runs before the skip link so it targets it.
+  (function mainLandmark() {
+    const topNav = document.getElementById('main-nav');
+    const footer = document.querySelector('body > footer');
+    if (!topNav || !footer || topNav.parentNode !== document.body) return;
+    const nodes = [];
+    for (let n = topNav.nextSibling; n && n !== footer; n = n.nextSibling) nodes.push(n);
+    const els = nodes.filter(function (n) {
+      return n.nodeType === 1 && n.tagName !== 'SCRIPT' && n.tagName !== 'STYLE';
+    });
+    if (!els.length) return;
+    const existing = document.querySelector('main');
+    if (existing && els.length === 1 && els[0] === existing) return;   // already correct
+    if (existing && existing.parentNode !== document.body) return;    // unexpected shape
+    const main = document.createElement('main');
+    main.id = 'main-content';
+    if (existing) {
+      const div = document.createElement('div');
+      Array.prototype.forEach.call(existing.attributes, function (a) {
+        if (a.name !== 'id') div.setAttribute(a.name, a.value);
+      });
+      if (existing.id && existing.id !== 'main-content') div.id = existing.id;
+      while (existing.firstChild) div.appendChild(existing.firstChild);
+      existing.parentNode.replaceChild(div, existing);
+      const i = nodes.indexOf(existing);
+      if (i !== -1) nodes[i] = div;
+    }
+    document.body.insertBefore(main, nodes[0]);
+    nodes.forEach(function (n) { main.appendChild(n); });
+  })();
+
+  // -- v26: trim the blank first/last line of Scripts-page snippets ---
+  // They now render with white-space: pre (enhancements.css), so the newline
+  // right after <div> and before </div> would show as empty lines.
+  (function tidySnippets() {
+    document.querySelectorAll('.script-card__snippet').forEach(function (el) {
+      const first = el.firstChild, last = el.lastChild;
+      if (first && first.nodeType === 3) first.nodeValue = first.nodeValue.replace(/^\s*\n/, '');
+      if (last && last.nodeType === 3) last.nodeValue = last.nodeValue.replace(/\s+$/, '');
+    });
+  })();
+
   // -- A11y: skip-to-content link ------------------------------
   (function skipLink() {
     const target = document.querySelector('main') ||
@@ -2001,6 +2048,7 @@
     const total = earned + progress + planned;
     const wrap = document.createElement('p');
     wrap.className = 'cert-summary';
+    wrap.setAttribute('role', 'group');   // v26: aria-label is not allowed on a bare <p>
     // The visible chips are aria-hidden and this one label reads cleanly instead,
     // so a screen reader hears "5 earned, 3 in progress, 3 planned, 11 total"
     // rather than the digits and words split apart.
