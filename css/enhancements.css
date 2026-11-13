@@ -1757,3 +1757,66 @@ a:focus-visible .ext-icon { opacity: 1; transform: translate(1px, -1px); }
   a { text-decoration: underline; }
   .card, .project-card, .cert-card, .terminal { border-color: currentColor; }
 }
+
+/* ==================== v26 weekly additions (2026-11-13) ==================== */
+/* WCAG 2.1 AA text contrast. An axe-core audit flagged small mono labels,
+   breadcrumbs, filter counts, footer text and light-theme status/severity tags
+   below 4.5:1. These token overrides lift them just past AA while keeping the
+   muted > faint hierarchy and the teal/blue palette. Screen only, so the print
+   palette defined earlier in this file still wins on paper. */
+@media screen {
+  :root,
+  [data-theme="dark"] {
+    --color-text-muted: #8d96a0;   /* was #7d8590 */
+    --color-text-faint: #7d8590;   /* was #484f58 (2.1:1) -> 4.6:1 on surface */
+  }
+  [data-theme="light"] {
+    --color-text-muted: #59636e;   /* was #656d76 */
+    --color-text-faint: #656d76;   /* was #9198a1 (2.9:1) -> 4.9:1 on white */
+    --color-critical: #b42a2a;
+    --color-high: #7d5200;
+    --color-medium: #0757b8;
+    --color-low: #17692e;
+  }
+}
+@media screen and (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --color-text-muted: #59636e;
+    --color-text-faint: #656d76;
+    --color-critical: #b42a2a;
+    --color-high: #7d5200;
+    --color-medium: #0757b8;
+    --color-low: #17692e;
+  }
+}
+/* style.css hard-codes the dark-theme hues on severity badges; follow the tokens. */
+.severity-badge--critical { color: var(--color-critical); }
+.severity-badge--high     { color: var(--color-high); }
+.severity-badge--medium   { color: var(--color-medium); }
+.severity-badge--low      { color: var(--color-low); }
+
+/* Links inside running prose need a non-colour cue (WCAG 1.4.1). */
+main p a:not([class]) {
+  text-decoration: underline !important;   /* beats an inline text-decoration:none */
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+main p a:not([class]):hover { text-decoration-thickness: 2px; }
+
+/* Light theme: the Scripts page code snippets used dark-theme syntax colours
+   (#9ecbff strings at 1.6:1 on the light code background). GitHub-light hues. */
+[data-theme="light"] .snippet-kw  { color: #b31d28; }
+[data-theme="light"] .snippet-fn  { color: #6639ba; }
+[data-theme="light"] .snippet-str { color: #0a3069; }
+[data-theme="light"] .snippet-num { color: #0550ae; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .snippet-kw  { color: #b31d28; }
+  :root:not([data-theme]) .snippet-fn  { color: #6639ba; }
+  :root:not([data-theme]) .snippet-str { color: #0a3069; }
+  :root:not([data-theme]) .snippet-num { color: #0550ae; }
+}
+
+/* Scripts page: the usage snippets are authored on separate lines but rendered
+   as one run-on paragraph. Keep their line breaks; long lines scroll inside the
+   box instead of widening the page. */
+.script-card__snippet { white-space: pre; overflow-x: auto; max-width: 100%; min-width: 0; tab-size: 4; }
