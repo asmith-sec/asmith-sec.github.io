@@ -1820,3 +1820,18 @@ main p a:not([class]):hover { text-decoration-thickness: 2px; }
    as one run-on paragraph. Keep their line breaks; long lines scroll inside the
    box instead of widening the page. */
 .script-card__snippet { white-space: pre; overflow-x: auto; max-width: 100%; min-width: 0; tab-size: 4; }
+
+/* Home badge photo, stacked layout (<=860px): the full-width 140px strip cropped
+   the portrait to a forehead-to-chin slice that got tighter as the screen widened
+   (just eyes at ~800px). Show it as a fixed square ID-badge photo instead, centred
+   on the strip, with the whole head in frame at every width. */
+@media (max-width: 860px) {
+  .badge-photo { height: 180px; }
+  .badge-photo img {
+    width: auto;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    object-position: 50% 30%;
+    border-inline: 1px solid var(--color-border);
+  }
+}
